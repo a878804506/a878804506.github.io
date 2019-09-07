@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+  
+    
+    <entry>
+      <title>国外VPS搭建SSR教程</title>
+      <link href="/2019/09/06/%E5%9B%BD%E5%A4%96VPS%E6%90%AD%E5%BB%BASSR%E6%95%99%E7%A8%8B/"/>
+      <url>/2019/09/06/%E5%9B%BD%E5%A4%96VPS%E6%90%AD%E5%BB%BASSR%E6%95%99%E7%A8%8B/</url>
+      
+        <content type="html"><![CDATA[<h3 id="一、本篇教程用的软件、技术和环境"><a href="#一、本篇教程用的软件、技术和环境" class="headerlink" title="一、本篇教程用的软件、技术和环境"></a>一、本篇教程用的软件、技术和环境</h3><p>1.一台国外的vps，系统：CentOS 7.4；<br>2.ssh连接工具Xshell；<br>3.Shadowsocks客户端； </p><h3 id="二、ssh连接到vps"><a href="#二、ssh连接到vps" class="headerlink" title="二、ssh连接到vps"></a>二、ssh连接到vps</h3><p>利用客户端软件（Xshell、Putty、SecureCRT等等）远程连接到你的国外vps。</p><h3 id="三、vps上跑脚本命令"><a href="#三、vps上跑脚本命令" class="headerlink" title="三、vps上跑脚本命令"></a>三、vps上跑脚本命令</h3><p>1.在命令行内输入如下：</p><pre class=" language-bash"><code class="language-bash">yum -y <span class="token function">install</span> <span class="token function">wget</span><span class="token function">wget</span> -N --no-check-certificate https://raw.githubusercontent.com/CecilWu/SSR-Chinese/master/ssr.sh <span class="token operator">&amp;&amp;</span> <span class="token function">chmod</span> +x ssr.sh <span class="token operator">&amp;&amp;</span> <span class="token function">bash</span> ssr.sh</code></pre><p>`<br><img style="width:100%;height:100%" src="http://staticfile.erdongchen.top/blog/blogPicture/20190906/1.jpg" align="left/"><br>此时服务器会自动安装脚本，如果脚本执行过程中没有反映，你直接回车确认即可。安装完毕后如下图所示：<br><img style="width:100%;height:100%" src="http://staticfile.erdongchen.top/blog/blogPicture/20190906/2.jpg" align="left/"><br>2.输入数字1后回车安装ShadowsocksR。安装完毕后会要求你自定义端口和密码。然后回车确认，他会要求你选择加密方式，此时一般选10：aes-256-cfb。如下图所示：<br><img style="width:100%;height:100%" src="http://staticfile.erdongchen.top/blog/blogPicture/20190906/3.jpg" align="left/"><br>3.然后按照下图设置协议插件、混淆插件。<br><img style="width:100%;height:100%" src="http://staticfile.erdongchen.top/blog/blogPicture/20190906/4.jpg" align="left/"><br>4.配置设备数、端口限速<br><img style="width:100%;height:100%" src="http://staticfile.erdongchen.top/blog/blogPicture/20190906/5.jpg" align="left/"><br>5.过段时间之后，系统会提示安装完成，同时显示SS账号的配置信息，自己保存好即可！<br><img style="width:100%;height:100%" src="http://staticfile.erdongchen.top/blog/blogPicture/20190906/6.jpg" align="left/"></p><h3 id="四、安装第二个账号"><a href="#四、安装第二个账号" class="headerlink" title="四、安装第二个账号"></a>四、安装第二个账号</h3><p>如果你想返回主界面继续安装第二个帐号，可以输入下面的命令调出，然后选择“9”切换到多端口模式即可:</p><pre class=" language-bash"><code class="language-bash"><span class="token function">bash</span> ssr.sh</code></pre><p>·<br><img style="width:100%;height:100%" src="http://staticfile.erdongchen.top/blog/blogPicture/20190906/7.jpg" align="left/"></p><h3 id="五、Shadowsocks客户端下载与配置"><a href="#五、Shadowsocks客户端下载与配置" class="headerlink" title="五、Shadowsocks客户端下载与配置"></a>五、Shadowsocks客户端下载与配置</h3><p><a href="https://github.com/shadowsocks/shadowsocks-windows/releases/download/4.1.7.1/Shadowsocks-4.1.7.1.zip" title="点击下载" target="_blank" rel="noopener">Shadowsocks客户端下载地址</a><br><img style="width:100%;height:100%" src="http://staticfile.erdongchen.top/blog/blogPicture/20190906/8.jpg" align="left/"><br>8.开启后即可愉快地玩耍了！<br><img style="width:100%;height:100%" src="http://staticfile.erdongchen.top/blog/blogPicture/20190906/9.jpg" align="left/"></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 其他教程 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 博客 </tag>
+            
+            <tag> 技术 </tag>
+            
+            <tag> linux </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>大数据学习（一）-基础配置</title>
+      <link href="/2019/08/29/%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%80%EF%BC%89-%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE/"/>
+      <url>/2019/08/29/%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%80%EF%BC%89-%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE/</url>
+      
+        <content type="html"><![CDATA[<h3 id="一、本篇教程侧重点导读"><a href="#一、本篇教程侧重点导读" class="headerlink" title="一、本篇教程侧重点导读"></a>一、本篇教程侧重点导读</h3><p>1.使用VMware虚拟出几台服务器后对网络的配置，主要是为了连通物理本机和虚拟服务器；（VMware的安装，虚拟服务器比较简单，这里不再赘述）<br>2.服务器之间配置ssh免密登陆；<br>3.修改主机名以及host配置；<br>4.JDK的安装配置；</p><h3 id="二、本篇教程用的软件、技术和说明"><a href="#二、本篇教程用的软件、技术和说明" class="headerlink" title="二、本篇教程用的软件、技术和说明"></a>二、本篇教程用的软件、技术和说明</h3><p>1.虚拟机软件VMware（如果你有几台比较好的服务器就不需要这个软件了）；<br>2.使用JDK版本：1.8.0_161；<br>3.使用到linux系统：CentOS 7.2；</p><h3 id="三、服务器的网络配置"><a href="#三、服务器的网络配置" class="headerlink" title="三、服务器的网络配置"></a>三、服务器的网络配置</h3><p>1.安装完VMware后，会在物理本机上多出两块虚拟网卡（VMnet1、VMnet8），一会我们需要对VMnet8配置一下；<br>2.用VMware虚拟出一台服务器之后，启动服务器后，使用命令<code>ifconfig</code>会看到有一块网卡（比如说我的就叫eth0），然后把名字记下来，在<code>/etc/sysconfig/netword-scripts</code>目录下找到这块网卡文件（linux里面万物皆文件）：<br><img style="width:85%;height:85%" src="http://staticfile.erdongchen.top/blog/blogPicture/20190829/networkCard_update.png" align="left/"><br>将其修改配置如下（网段可自定义）：<br><img style="width:85%;height:85%" src="http://staticfile.erdongchen.top/blog/blogPicture/20190829/networkCard_configure.png" align="left/"><br>3.配置完毕之后重启网络<code>service network restart</code><br><strong><font color="red">防坑：如果网卡重启失败，把网卡文件（我的是ifcfg-eth0）中的mac配置（HWADDR=xx:xx:xx:xx）项删除，再删除网卡相关信息文件<code>/etc/udev/rules.d/70-persistent-net.rules</code>,最后重启服务器<code>reboot</code></font></strong><br>至此，linux服务器配置完毕，在配置VMware的虚拟网络配置！<br>4.打开：VMware &gt; 编辑 &gt; 虚拟网络编辑器；修改名字为VMnet8的那块网卡，将子网ip改为广播地址：<br><img style="width:85%;height:85%" src="http://staticfile.erdongchen.top/blog/blogPicture/20190829/ipaddr_update.png" align="left/"><br>点击应用之后，VMware会自动将<code>192.168.6.1</code>配置成为你的物理机VMnet8的那块网卡，将<code>192.168.6.2</code>作为网关地址，如下两图：<br><img style="width:85%;height:85%" src="http://staticfile.erdongchen.top/blog/blogPicture/20190829/localhost_explain.png" align="left/"><br><img style="width:85%;height:85%" src="http://staticfile.erdongchen.top/blog/blogPicture/20190829/look_default_gateway.png" align="left/"><br><strong><font color="green">启动服务器之后查看ip地址时就是你在ifcfg-eth0文件中配置的ip地址，并且可以从物理机（192.168.6.1）ping通你的服务器（192.168.6.101），此时第一台虚拟机配置完成，你可以使用VMware自带的克隆功能多克隆几台服务器，需要注意的是：克隆出来的服务器的ip地址、mac地址和被克隆的服务器会冲突，需要重新修改一下</font></strong><br>5.重新生成克隆出来的每一台服务器的mac地址：<br><img style="width:85%;height:85%" src="http://staticfile.erdongchen.top/blog/blogPicture/20190829/createMAC.png" align="left/"><br>6.启动每一台克隆出来的服务器并且修改其ip地址：打开<code>/etc/sysconfig/netword-scripts/ifcfg-eth0</code>文件 将IPADDR 修改成新的ip地址并重启；<br>到此，所有服务器的网络配置完成！<br><img style="width:85%;height:85%" src="http://staticfile.erdongchen.top/blog/blogPicture/20190829/network_completed.png" align="left/"></p><h3 id="四、修改主机名、配置host"><a href="#四、修改主机名、配置host" class="headerlink" title="四、修改主机名、配置host"></a>四、修改主机名、配置host</h3><p>1.主机名：修改每一台机器上的配置文件<code>/etc/hostname</code>，并重启；<br>2.配置域名：修改<code>192.168.6.100</code>机器上面配置文件：<code>/etc/hosts</code>,修改完成后，如图所示：<br><img style="width:85%;height:85%" src="http://staticfile.erdongchen.top/blog/blogPicture/20190829/hosts_update.png" align="left/"><br><strong><font color="green">配置域名的作用是：在后面学习大数据的时候，会频繁使用到各个服务器的ip地址，配置成域名之后方面管理和记忆</font></strong><br>3.将100上面的hosts文件覆盖到其他机器上面：<code>scp hosts root@192.168.6.101:/etc/</code><br><strong><font color="red">说明：<br>在后面博客中将称<code>192.168.6.100</code>为<code>master</code><br>在后面博客中将称<code>192.168.6.101</code>为<code>slave1</code><br>在后面博客中将称<code>192.168.6.102</code>为<code>slave2</code><br>在后面博客中将称<code>192.168.6.103</code>为<code>slave3</code><br>在后面博客中将称<code>192.168.6.104</code>为<code>slave4</code><br></font></strong></p><h3 id="五、ssh免密登陆"><a href="#五、ssh免密登陆" class="headerlink" title="五、ssh免密登陆"></a>五、ssh免密登陆</h3><p>1.在master上输入：<code>ssh-keygen -t rsa -b 4096</code>，此时会在当前登录用户家目录下生成.ssh文件夹,里面会有一对秘钥，查看命令<code>ll ~/.ssh</code>；<br><strong><font color="green">参数说明：<br>-t type 指定要创建的密钥类型。可以使用：”rsa1”(SSH-1) “rsa”(SSH-2) “dsa”(SSH-2)<br>-b bits 指定密钥长度。对于RSA密钥，最小要求768位，默认是2048位。DSA密钥必须恰好是1024位(FIPS 186-2 标准的要求)。</font></strong><br>2.接着输入<code>ssh-copy-id -i ~/.ssh/id_rsa.pub root@slave1</code>，这时会让你输入slave1的root账号密码，这句命令的效果是将刚刚生成的id_rsa.pub里面的信息追加到101服务器上/root/.ssh目录下的authorized_keys文件中；<br><strong><font color="green">这时就可以从master免密登录到slave1上了：<code>ssh root@slave1</code> </font></strong><br><strong><font color="red">注意：如果还需要从slave1免密登录到master，则需要在slave1服务器上执行第1和2两步</font></strong><br>你还可以将所有的服务器配置成互为免密登录，配置成互为免密登录之后，方便后面学习大数据的时候少踩坑；<br>后面在hdfs集群启动的时候，还需要将自己和自己配置成免密登录，不然会有问题。</p><h3 id="六、JDK的安装配置"><a href="#六、JDK的安装配置" class="headerlink" title="六、JDK的安装配置"></a>六、JDK的安装配置</h3><p>1.将事先准备好的jdk的tar.gz包上传到master上解压：<code>tar -xzvf jdk-8u161-linux-x64.tar.gz -C /usr/local/</code><br><strong><font color="green">-C 解压文件到指定的目录 </font></strong><br>2.编辑配置环境变量<code>vim /etc/profile</code>,添加如下配置：</p><pre class=" language-java"><code class="language-java">JAVA_HOME<span class="token operator">=</span><span class="token operator">/</span>usr<span class="token operator">/</span>local<span class="token operator">/</span>jdk1<span class="token number">.8</span><span class="token punctuation">.</span>0_161CLASSPATH<span class="token operator">=</span>$JAVA_HOME<span class="token operator">/</span>lib<span class="token operator">/</span>PATH<span class="token operator">=</span>$PATH<span class="token operator">:</span>$JAVA_HOME<span class="token operator">/</span>binexport PATH JAVA_HOME CLASSPATH</code></pre><p>3.执行命令 ：<code>source /etc/profile</code><br>4.查看安装情况<code>java -version</code><br><strong><font color="red">JDK在每台机器上都需要安装！<br></font></strong></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 大数据 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 技术 </tag>
+            
+            <tag> 环境配置 </tag>
+            
+            <tag> linux </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>开通博客的第一天干嘛？当然是手把手教你如何搭建博客啦！</title>
+      <link href="/2019/08/15/howToCreateBlog/"/>
+      <url>/2019/08/15/howToCreateBlog/</url>
+      
+        <content type="html"><![CDATA[<h3 id="本套博客搭建教程的前置条件："><a href="#本套博客搭建教程的前置条件：" class="headerlink" title="本套博客搭建教程的前置条件："></a>本套博客搭建教程的前置条件：</h3><p>&emsp;&emsp;1、域名一个；<br>&emsp;&emsp;2、github账号一个；<br>&emsp;&emsp;3、本机已安装node.js；<br>&emsp;&emsp;4、本机已安装git，并且本地仓库已关联到自己github上的一个repository，且repository的名字必须为‘你的github账号.github.io’</p><h3 id="下面进入本教程："><a href="#下面进入本教程：" class="headerlink" title="下面进入本教程："></a>下面进入本教程：</h3><p><strong>基础部分</strong><br>&emsp;&emsp;1、切换国内源  <code>npm config set registry=&quot;http://registry.cnpmjs.org&quot;</code><br>&emsp;&emsp;2、安装hexo  <code>npm install -g hexo</code><br>&emsp;&emsp;3、初始化Hexo  <code>hexo init</code><br>&emsp;&emsp;4、安装必要的模块  <code>npm install</code><br>&emsp;&emsp;5、生成静态文件  <code>hexo g  或者  hexo generate</code><br>&emsp;&emsp;6、本地测试（浏览器查看：<a href="http://localhost:4000" target="_blank" rel="noopener">http://localhost:4000</a>）  <code>hexo s  或者  hexo server</code></p><p><strong>个性化设置</strong><br>&emsp;&emsp;1、hexo配置文件修改，在根目录下（执行hexo init的那个目录）会有一个_config.yml的配置文件，修改如下内容：</p><pre class=" language-java"><code class="language-java"># Hexo Configuration# Docs<span class="token operator">:</span> http<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>hexo<span class="token punctuation">.</span>io<span class="token operator">/</span>docs<span class="token operator">/</span>configuration<span class="token punctuation">.</span>html# Source<span class="token operator">:</span> https<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>github<span class="token punctuation">.</span>com<span class="token operator">/</span>hexojs<span class="token operator">/</span>hexo<span class="token operator">/</span>Site   title<span class="token operator">:</span> 换成你的主页标题   subtitle<span class="token operator">:</span> 主页副标题   description<span class="token operator">:</span> 主页介绍的一句话   author<span class="token operator">:</span> 你的名字   language<span class="token operator">:</span> zh<span class="token operator">-</span>CN #语言   timezone<span class="token operator">:</span> Asia<span class="token operator">/</span>Shanghai #时区##    # URL#    ## If your site is put in a subdirectory<span class="token punctuation">,</span>#    ##set url as <span class="token string">'http://yoursite.com/child'</span> and root as <span class="token string">'/child/'</span>#    # 更换域名是需要配置的参数   url<span class="token operator">:</span> http<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>voidking<span class="token punctuation">.</span>com   root<span class="token operator">:</span> <span class="token operator">/</span>##    # Extensions#    ## Plugins<span class="token operator">:</span> http<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>hexo<span class="token punctuation">.</span>io<span class="token operator">/</span>plugins<span class="token operator">/</span>#    ## Themes<span class="token operator">:</span> http<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>hexo<span class="token punctuation">.</span>io<span class="token operator">/</span>themes<span class="token operator">/</span>   theme<span class="token operator">:</span> 你用的主题文件夹名字 # themes下的文件##    # Deployment#    ## Docs<span class="token operator">:</span> http<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>hexo<span class="token punctuation">.</span>io<span class="token operator">/</span>docs<span class="token operator">/</span>deployment<span class="token punctuation">.</span>html   deploy<span class="token operator">:</span>       type<span class="token operator">:</span> git       # GitHub仓库地址，此地址一定要是前置条件第四条的那个地址       # 地址格式：https<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>github<span class="token punctuation">.</span>com<span class="token operator">/</span>你的github账号<span class="token operator">/</span>你的github账号<span class="token punctuation">.</span>github<span class="token punctuation">.</span>io<span class="token punctuation">.</span>git       # 例如       repository<span class="token operator">:</span> https<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>github<span class="token punctuation">.</span>com<span class="token operator">/</span>a878804506<span class="token operator">/</span>a878804506<span class="token punctuation">.</span>github<span class="token punctuation">.</span>io<span class="token punctuation">.</span>git       branch<span class="token operator">:</span> master</code></pre><p><strong><font color="red">防坑：_config.yml配置参数时，注意冒号后面一定要有一个空格</font></strong><br>&emsp;&emsp;2、修改主题<br>&emsp;&emsp;&emsp;找一个自己喜欢的主题，然后clone到hexo根目录下的themes目录下<br>&emsp;&emsp;&emsp;eg：切换到根目录下文件下，cmd执行<br>&emsp;&emsp;&emsp;<code>git clone -b master https://github.com/lewis-geek/hexo-theme-Aath.git themes/aath</code><br>&emsp;&emsp;&emsp;下载好后，你在_config.yml（主题是根目录下的）中的theme:处配置成你下在的主题名字（就是下载的主题文件夹名字 ）</p><p>&emsp;&emsp;3、上传的github上（会上传到前置条件第四条的那个地址下）<br>&emsp;&emsp;&emsp;如果想把原来的清除 <code>hexo clean</code><br>&emsp;&emsp;&emsp;重新生成静态文件 <code>hexo g</code><br>&emsp;&emsp;&emsp;上传到提交文件 <code>hexo d</code><br>&emsp;&emsp;&emsp;此时就可以用浏览器访问前置条件第四条的那个地址，会就出现你的博客首页</p><p><strong>附加:域名配置</strong><br>&emsp;&emsp;1、到你域名提供商那里配置域名解析规则,记录类型为：CNAME<br>&emsp;&emsp;2、记录值为：前置条件第四条的那个地址<br>&emsp;&emsp;3、Hexo根目录下会有一个source目录，在source下新建一个CNAME文件，文件内容是你刚刚配置好的域名<br>&emsp;&emsp;4、再次修改Hexo根目录下的_config.yml配置文件，填写url<br>&emsp;&emsp;5、再次执行打包上传命令 <code>hexo clean &amp;&amp; hexo g &amp;&amp; hexo d</code><br><strong><font color="red">防坑：域名访问404，但是xxx.github.io能访问，那就说明还是你的域名配置有问题，仔细检查</font></strong></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 其他教程 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 博客 </tag>
+            
+            <tag> 环境搭建 </tag>
+            
+            <tag> 技术 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+  
+  
+</search>
