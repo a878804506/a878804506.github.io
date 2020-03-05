@@ -1,0 +1,1718 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="nginx配置浅谈-configure的参数配置说明, 云辉相映">
+    <meta name="description" content="参数说明
+
+
+序号
+参数格式
+参数含义
+
+
+
+1
+–prefix=path
+定义安装目录
+
+
+2
+–sbin-path=path
+设置nginx可执行文件的路径
+
+
+3
+–modules-path=path
+定义将安装nginx动态模块的目">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>nginx配置浅谈-configure的参数配置说明 | 云辉相映</title>
+    <link rel="icon" type="image/jpeg" href="/my.jpeg">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+    
+    <script src="/libs/jquery/jquery.min.js"></script>
+    
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper head-container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/myGirl.jpg" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">云辉相映</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/aboutshe" class="waves-effect waves-light">
+      
+      <i class="fas fa-image" style="zoom: 0.6;"></i>
+      
+      <span>关于她</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/myGirl.jpg" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">云辉相映</div>
+        <div class="logo-desc">
+            
+            写篇博客一时爽，一直写一直爽！
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/aboutshe" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-image"></i>
+			
+			关于她
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			Contact
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/a878804506" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/a878804506" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('请输入访问本文章的密码')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/18.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <div class="description center-align post-title">
+                        nginx配置浅谈-configure的参数配置说明
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/技术/">
+                                <span class="chip bg-color">技术</span>
+                            </a>
+                        
+                            <a href="/tags/linux/">
+                                <span class="chip bg-color">linux</span>
+                            </a>
+                        
+                            <a href="/tags/说明书/">
+                                <span class="chip bg-color">说明书</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/nginx/" class="post-category">
+                                nginx
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2019-09-20
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2020-03-05
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    5.8k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    21 分
+                </div>
+                
+				
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+            
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h3 id="参数说明"><a href="#参数说明" class="headerlink" title="参数说明"></a>参数说明</h3><table>
+<thead>
+<tr>
+<th align="center">序号</th>
+<th align="center">参数格式</th>
+<th align="center">参数含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">1</td>
+<td align="center">–prefix=path</td>
+<td align="center">定义安装目录</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center">–sbin-path=path</td>
+<td align="center">设置nginx可执行文件的路径</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="center">–modules-path=path</td>
+<td align="center">定义将安装nginx动态模块的目录</td>
+</tr>
+<tr>
+<td align="center">4</td>
+<td align="center">–conf-path=path</td>
+<td align="center">设置nginx.conf配置文件路径名</td>
+</tr>
+<tr>
+<td align="center">5</td>
+<td align="center">–error-log-path=path</td>
+<td align="center">设置主要错误，警告和诊断文件的路径名</td>
+</tr>
+<tr>
+<td align="center">6</td>
+<td align="center">–pid-path=path</td>
+<td align="center">设置nginx.pid将存储主进程的进程ID 的文件的路径名</td>
+</tr>
+<tr>
+<td align="center">7</td>
+<td align="center">–lock-path=path</td>
+<td align="center">为锁定文件的名称设置前缀</td>
+</tr>
+<tr>
+<td align="center">8</td>
+<td align="center">–user=name</td>
+<td align="center">设置非特权用户的名称，其凭据将由工作进程使用</td>
+</tr>
+<tr>
+<td align="center">9</td>
+<td align="center">–group=name</td>
+<td align="center">设置其凭据将由工作进程使用的组的名称</td>
+</tr>
+<tr>
+<td align="center">10</td>
+<td align="center">–build=name</td>
+<td align="center">设置编译名</td>
+</tr>
+<tr>
+<td align="center">11</td>
+<td align="center">-builddir=path</td>
+<td align="center">置编译目录</td>
+</tr>
+<tr>
+<td align="center">12</td>
+<td align="center">–with-select_module、–without-select_module</td>
+<td align="center">启用或禁用select事件驱动模型</td>
+</tr>
+<tr>
+<td align="center">13</td>
+<td align="center">–with-poll_module、–without-poll_module</td>
+<td align="center">启用或禁用poll事件驱动模型</td>
+</tr>
+<tr>
+<td align="center">14</td>
+<td align="center">–with-threads</td>
+<td align="center">启用线程池功能</td>
+</tr>
+<tr>
+<td align="center">15</td>
+<td align="center">–with-file-aio</td>
+<td align="center">我们就可以启用线程池功能，让请求排队等待处理，并且可以充分利用CPU提高处理效率。开启线程池需要AIO的支持。 启用异步文件IO（AIO）支持。一般用于大文件传输的场景下。</td>
+</tr>
+<tr>
+<td align="center">16</td>
+<td align="center">–with-http_ssl_module</td>
+<td align="center">将HTTPS协议支持添加到HTTP服务器。默认情况下不构建此模块。需要OpenSSL库来构建和运行此模块。</td>
+</tr>
+<tr>
+<td align="center">17</td>
+<td align="center">–with-http_v2_module</td>
+<td align="center">启用HTTP_V2模块，新的HTTP协议，相比HTTP1更优更快。默认情况下不构建此模块。</td>
+</tr>
+<tr>
+<td align="center">18</td>
+<td align="center">–with-http_realip_module</td>
+<td align="center">启用HTTP_Realip模块，用于修改客户端请求头中客户端IP地址值，一般用于反向代理中，将真实的客户端IP传送给后端的应用服务器。默认情况下不构建此模块。</td>
+</tr>
+<tr>
+<td align="center">19</td>
+<td align="center">–with-http_addition_module</td>
+<td align="center">启用HTTP_Addition模块，用于在响应之前和之后添加文本。默认情况下不构建此模块。</td>
+</tr>
+<tr>
+<td align="center">20</td>
+<td align="center">–with-http_xslt_module</td>
+<td align="center">启用HTTP_Xslt模块，这个模块是一个过滤器，它可以通过XSLT模板转换成XML响应。需要ibxml2和libxslt库的支持。默认情况下不构建此模块。</td>
+</tr>
+<tr>
+<td align="center">21</td>
+<td align="center">–with-http_xslt_module=dynamic</td>
+<td align="center">启用HTTP_Xslt动态模块，允许在配置文件中通过”load_module”指令手动启用和禁用模块的使用。默认情况下不构建此模块。</td>
+</tr>
+<tr>
+<td align="center">22</td>
+<td align="center">–with-http_image_filter_module</td>
+<td align="center">启用HTTP_Image_Filter模块，这个模块是一个集成图片处理器，我们可以使用它转换JPEG、GIF、PNG和WEBP格式的图像，验证这些格式图像的有效型（是不是此格式的图像），输出JSON格式的图像信息，旋转图像，按比例缩放图像，剪切图片等。默认情况下不构建此模块。</td>
+</tr>
+<tr>
+<td align="center">23</td>
+<td align="center">–with-http_image_filter_module=dynamic</td>
+<td align="center">启用HTTP_Image_Filter动态模块，允许在配置文件中通过”load_module”指令手动启用和禁用模块的使用。默认情况下不构建此模块。</td>
+</tr>
+<tr>
+<td align="center">24</td>
+<td align="center">–with-http_geoip_module</td>
+<td align="center">启用HTTP_Geoip模块，这个模块用于处理不同地区的访问，当来自某一个区域的访问时将其重定向到对应的服务或者项目上，需要MaxMind GeoIP库的支持。默认情况下不构建此模块。</td>
+</tr>
+<tr>
+<td align="center">25</td>
+<td align="center">–with-http_geoip_module=dynamic</td>
+<td align="center">启用HTTP_Geoip动态模块，允许在配置文件中通过”load_module”指令手动启用和禁用模块的使用。默认情况下不构建此模块。</td>
+</tr>
+<tr>
+<td align="center">26</td>
+<td align="center">–with-http_sub_module</td>
+<td align="center">启用HTTP_Sub模块，这个模块是一个过滤器，用于修改响应的内容，可以将一个指定的字符串替换成另一个字符串。默认情况下不构建此模块。</td>
+</tr>
+<tr>
+<td align="center">27</td>
+<td align="center">–with-http_dav_module</td>
+<td align="center">启用HTTP_DAV模块，用于通过WEBDAV协议提供WEB的文件管理功能，类似于一个WEB的文件管理器，可以对服务器的文件进行管理。默认情况下不构建此模块。</td>
+</tr>
+<tr>
+<td align="center">28</td>
+<td align="center">–with-http_flv_module</td>
+<td align="center">启用HTTP_FLV模块，用于为Flash Video（FLV）文件提供伪流视频服务端支持，开启它则允许在网页上播放FLV格式的视频。默认情况下不构建此模块。</td>
+</tr>
+<tr>
+<td align="center">29</td>
+<td align="center">–with-http_mp4_module</td>
+<td align="center">启用HTTP_MP4模块，用于为MP4格式的视频文件提供伪流视频服务端支持，开启它则允许在网页上播放MP4格式的视频。默认情况下不构建此模块。</td>
+</tr>
+<tr>
+<td align="center">30</td>
+<td align="center">–with-http_gunzip_module</td>
+<td align="center">启用HTTP_Gunzip模块，用于为不支持”gzip”编码方式的客户端解压响应。</td>
+</tr>
+<tr>
+<td align="center">31</td>
+<td align="center">–with-http_gzip_static_module</td>
+<td align="center">启用HTTP_Gzip_Static模块，用于将静态内容压缩成”.gz”为文件扩展名的预压缩文件，并缓存在本地，在响应时会将此文件发送以替代普通文件。</td>
+</tr>
+<tr>
+<td align="center">32</td>
+<td align="center">–with-http_auth_request_module</td>
+<td align="center">启用HTTP_Auth_Request模块，此模块是一个请求验证模块，可以使用外部服务器或服务对网站的每个请求进行身份验证。当用户访问时，Nginx会向用于验证请求的外部服务器发出验证请求，若返回的状态码为200，则通过允许访问，若返回401或403，则访问会被拒绝。默认情况下不构建此模块。</td>
+</tr>
+<tr>
+<td align="center">33</td>
+<td align="center">–with-http_random_index_module</td>
+<td align="center">启用HTTP_Random_Index模块，随机主页模块，当用户访问时，随机响应一个主页，而并非由”index”指令定义的一个主页，而是从主页池中随机选中一个主页面返回。默认情况下不构建此模块。</td>
+</tr>
+<tr>
+<td align="center">34</td>
+<td align="center">–with-http_secure_link_module</td>
+<td align="center">启用HTTP_Secure_Link模块，防盗链模块，用于检查请求链接的权限以及是否过期，多用于文件下载防盗链。默认情况下不构建此模块。</td>
+</tr>
+<tr>
+<td align="center">35</td>
+<td align="center">–with-http_degradation_module</td>
+<td align="center">启用HTTP_Degradation模块，用于当主机剩余内存较低时，用户请求访问，Nginx会对某些”location”的请求返回204或444的响应码。默认情况下不构建此模块。</td>
+</tr>
+<tr>
+<td align="center">36</td>
+<td align="center">–with-http_slice_module</td>
+<td align="center">启用HTTP_Slice模块，此模块是一个过滤器，用于将一个大的完整的文件分割成多个小块文件，分段传送给用户，一般用于大文件传输的场景下，使用它可以让用户快速的得到响应。默认情况下不构建此模块。</td>
+</tr>
+<tr>
+<td align="center">37</td>
+<td align="center">–with-http_stub_status_module</td>
+<td align="center">启用HTTP_Stub_Status模块，状态信息统计模块，用于返回一个Nginx状态信息统计信息页面，管理员访问这个页面可以获取Nginx的请求处理、当前连接、等待连接等统计信息，一般用于监控Nginx的运行状态。默认情况下不构建此模块。</td>
+</tr>
+<tr>
+<td align="center">38</td>
+<td align="center">–without-http_charset_module</td>
+<td align="center">禁用HTTP_Charset模块，此模块用于将指定的字符集添加到”Content-Type”响应头字段中。此外此模块还可以将数据从一个字符集转换为另一个字符集，此模块用于字符集设置。不建议禁用。</td>
+</tr>
+<tr>
+<td align="center">39</td>
+<td align="center">–without-http_gzip_module</td>
+<td align="center">禁用HTTP_Gzip模块，此模块用于HTTP响应内容传输压缩，可以将响应内存在传输时将其压缩成Gzip编码格式的响应传送给客户端，使用Gzip编码格式响应内容体积会变小，会提高传输效率。不建议禁用。</td>
+</tr>
+<tr>
+<td align="center">40</td>
+<td align="center">–without-http_ssi_module</td>
+<td align="center">禁用HTTP_SSI模块，此模块是一个过滤器，用于处理通过它响应中的SSI（Server Side Includes）命令。目前支持的SSI命令列表并不完整，SSI指令是一种可以嵌入WEB页面的一种语法指令。</td>
+</tr>
+<tr>
+<td align="center">41</td>
+<td align="center">–without-http_userid_module</td>
+<td align="center">禁用HTTP_Userid模块，此模块用于识别客户端的Cookie。可以使用嵌入变量”$uid_got”和”$uid_set”记录已接受和设置的Cookie。</td>
+</tr>
+<tr>
+<td align="center">42</td>
+<td align="center">–without-http_access_module</td>
+<td align="center">禁用HTTP_Access模块，此模块用于限制对某些客户端地址的访问，Allow or Deny。不建议禁用。</td>
+</tr>
+<tr>
+<td align="center">43</td>
+<td align="center">–without-http_auth_basic_module</td>
+<td align="center">禁用HTTP_Auth_Basic模块，该模块用于HTTP基本身份验证，使用用户名和密码来限制对资源的访问。</td>
+</tr>
+<tr>
+<td align="center">44</td>
+<td align="center">–without-http_mirror_module</td>
+<td align="center">禁用HTTP_Mirror模块，该模块用于将正式环境的流量拷贝到镜像（测试）环境下，一般用于测试环境引入真实环境的流量实现对测试环境的压力测试。</td>
+</tr>
+<tr>
+<td align="center">45</td>
+<td align="center">–without-http_autoindex_module</td>
+<td align="center">禁用HTTP_Autoindex模块，该模块用于在处理以斜杠字符（’/‘）结尾的请求，并在找不到索引文件的情况下生成目录列表。</td>
+</tr>
+<tr>
+<td align="center">46</td>
+<td align="center">–without-http_geo_module</td>
+<td align="center">禁用HTTP_Geo模块，该模块用于从指定变量中获取客户端的IP地址，并将其嵌入到另外一个变量中。默认情况下从”$remote_addr”变量中取得客户端的IP地址。我们可以通过它结合”HTTP_Upstream”实现对来源客户端的负载均衡，当来自不同的客户端请求时，将其负载均衡给后端的不同的服务器处理；还可以使用它结合”HTTP_Map”+”HTTP_Limit_Conn”模块实现对来源客户端的限速功能。</td>
+</tr>
+<tr>
+<td align="center">47</td>
+<td align="center">–without-http_map_module</td>
+<td align="center">禁用HTTP_Map模块，该模块用于创建一个变量的映射表，结果变量可以是一个字符串也可以是另外一个变量。</td>
+</tr>
+<tr>
+<td align="center">48</td>
+<td align="center">–without-http_split_clients_module</td>
+<td align="center">禁用HTTP_Splic_Clients模块，该模块用于创建适用于A/B测试的变量，AB测试也称之为拆分测试，也就是将一个项目的两个不同版本发布，看用户更喜欢用于那个版本，若版本A受欢迎则发布版本A。</td>
+</tr>
+<tr>
+<td align="center">49</td>
+<td align="center">–without-http_referer_module</td>
+<td align="center">禁用HTTP_Referer模块，该模块用于防盗链，用于阻止对请求头部”referer”字段具有无效值的请求访问，可以设置一个白名单，非白名单的无效来源网址的连接则会拒绝请求，使用此模块我们还需考虑到，即使对于有效的请求，常规浏览器也可能不发送”referer”字段。不建议禁用。</td>
+</tr>
+<tr>
+<td align="center">50</td>
+<td align="center">–without-http_rewrite_module</td>
+<td align="center">禁用HTTP_Rewerte模块，该模块用于地址重写，用于将来源请求地址重定向到指定的地址上，可以保护真实的地址，增加安全性，该模块需要PCRE库的支持。不建议禁用。</td>
+</tr>
+<tr>
+<td align="center">51</td>
+<td align="center">–without-http_proxy_module</td>
+<td align="center">禁用HTTP_Proxy模块，该模块用于将请求代理传递到另外一台WEB服务器去处理，Nginx的核心模块。不建议禁用。</td>
+</tr>
+<tr>
+<td align="center">52</td>
+<td align="center">–without-http_fastcgi_module</td>
+<td align="center">禁用HTTP_FastCGI模块，该模块用于将请求代理传递到另外一台FastCGI服务器去处理，一般用于反代PHP。不建议禁用。</td>
+</tr>
+<tr>
+<td align="center">53</td>
+<td align="center">–without-http_uwsgi_module</td>
+<td align="center">禁用HTTP_UwSGI模块，该模块用于将请求代理传递给另外一台UwSGI服务器去处理。</td>
+</tr>
+<tr>
+<td align="center">54</td>
+<td align="center">–without-http_scgi_module</td>
+<td align="center">禁用HTTP_SCGI模块，该模块用于将请求代理传递给另外一台SCGI服务器去处理。</td>
+</tr>
+<tr>
+<td align="center">55</td>
+<td align="center">–without-http_grpc_module</td>
+<td align="center">禁用HTTP_Grpc模块，该模块用于将请求代理传递给另外一台Grpc服务器去处理。</td>
+</tr>
+<tr>
+<td align="center">56</td>
+<td align="center">–without-http_memcached_module</td>
+<td align="center">禁用HTTP_Memcached模块，该模块用于Nginx从Memcached服务器获取响应内容。</td>
+</tr>
+<tr>
+<td align="center">57</td>
+<td align="center">–without-http_limit_conn_module</td>
+<td align="center">禁用HTTP_Limit_Conn模块，该模块用于限制并发连接数量以及下载带宽限制。</td>
+</tr>
+<tr>
+<td align="center">58</td>
+<td align="center">–without-http_limit_req_module</td>
+<td align="center">禁用HTTP_Limit_Req模块，该模块用于限制请求数量，可以限制请求的频率。</td>
+</tr>
+<tr>
+<td align="center">59</td>
+<td align="center">–without-http_empty_gif_module</td>
+<td align="center">禁用HTTP_Empty_Gif模块，该模块会在内容中常驻的一个1X1的透明空白的GIF图像，当用户请求时，返回该图像，一般用于测试。</td>
+</tr>
+<tr>
+<td align="center">60</td>
+<td align="center">–without-http_browser_module</td>
+<td align="center">禁用HTTP_Browser模块，该模块用于创建变量，变量的值取决于请求头中”user-agent”的值，一般用于区别新式或者旧式浏览器，若新式浏览器则将请求重定向到新式的WEB页面中，呈现新页面，若为旧式浏览器则将返回旧式的WEB页面。</td>
+</tr>
+<tr>
+<td align="center">61</td>
+<td align="center">–without-http_upstream_hash_module</td>
+<td align="center">禁用HTTP_Upstream_Hash模块，该模块提供了由”Upstream”指令定义的一组服务器的负载均衡方法”Hash”，该方法基于散列键值（hash），它会将客户端+服务端的映射关系存放到一个散列键值表中，当客户端第二次请求时则会匹配关系将请求转发至后端的同一台服务器上，实现会话保持功能。该模块提供指令”hash”,在会话保持中，我们唯一能标识客户端的标志就是SessionID，所以我们可以使用指令”hash $cookie_jsession”实现会话保持功能。不建议禁用。</td>
+</tr>
+<tr>
+<td align="center">62</td>
+<td align="center">–without-http_upstream_ip_hash_module</td>
+<td align="center">禁用HTTP_Upstream_IP_Hash模块，该模块提供了由”Upstream”指令定义的一组服务器的负载均衡方法”ip_hash”，该方法也用于会话保持，不过它是基于客户端IP的Hash方法，由于用户可能是ADSL接入的网络，所以客户端可能受动态IP影响会发生变化，所以一般不建议采用这种方法。</td>
+</tr>
+<tr>
+<td align="center">63</td>
+<td align="center">–without-http_upstream_least_conn_module</td>
+<td align="center">禁用HTTP_Upstream_Least_Conn模块，该模块提供了由”Upstream”指令定义的一组服务器的负载均衡方法”least_conn”，该方法用于将请求传递到具有最少活动连接、权重较高（性能最好）的后端服务器上去处理。</td>
+</tr>
+<tr>
+<td align="center">64</td>
+<td align="center">–without-http_upstream_keepalive_module</td>
+<td align="center">禁用HTTP_Upstream_Keepalive模块，该模块可以为由”Upstream”指令定义的一组服务器提供保持长连接的功能，使用它则会为每个Worker工作进程与后端服务器保持空闲的长连接，连接数由”keepalive”指令指定，当空闲的长连接数量超过指定值时，将关闭最近最少使用的连接。</td>
+</tr>
+<tr>
+<td align="center">65</td>
+<td align="center">–without-http_upstream_zone_module</td>
+<td align="center">禁用HTTP_Upstream_Zone模块，该模块可以将由”Upstream”指令定义的服务器组运行时的状态存储在共享内存区域中。</td>
+</tr>
+<tr>
+<td align="center">66</td>
+<td align="center">–with-http_perl_module、–with-http_perl_module=dynamic</td>
+<td align="center">启用HTTP_Perl模块，用于在Perl中实现位置和变量处理程序，并可以将Perl调用到SSI中。默认情况下不构建此模块。 启用HTTP_Perl动态模块，允许在配置文件中通过”load_module”指定手动启用和禁用模块的使用。默认情况下不构建此模块。</td>
+</tr>
+<tr>
+<td align="center">67</td>
+<td align="center">–with-perl_modules_path=PATH</td>
+<td align="center">置一个用于保留Perl模块的目录路径。</td>
+</tr>
+<tr>
+<td align="center">68</td>
+<td align="center">–with-perl=PATH</td>
+<td align="center">设置Perl可执行命令文件的路径。</td>
+</tr>
+<tr>
+<td align="center">69</td>
+<td align="center">–http-log-path=PATH</td>
+<td align="center">设置访问日志文件存放目录路径。安装后，可以在主配置文件中使用”access_log”指令修改。</td>
+</tr>
+<tr>
+<td align="center">70</td>
+<td align="center">–http-client-body-temp-path=PATH</td>
+<td align="center">设置用于存储客户端请求主体的临时文件存放目录路径。安装后，可以在主配置文件中使用”client_body_temp_path”指令修改。</td>
+</tr>
+<tr>
+<td align="center">71</td>
+<td align="center">–http-proxy-temp-path=PATH</td>
+<td align="center">设置用于存储从代理服务器接受的数据临时文件存放目录路径。安装后，可以在主配置文件中使用”proxy_temp_path”指令修改。</td>
+</tr>
+<tr>
+<td align="center">72</td>
+<td align="center">–http-fastcgi-temp-path=PATH</td>
+<td align="center">设置用于存储从FastCGI服务器接受的数据临时文件存放目录路径。安装后，可以在主配置文件中使用”fastcgi_temp_path”指令修改。</td>
+</tr>
+<tr>
+<td align="center">73</td>
+<td align="center">–http-uwsgi-temp-path=PATH</td>
+<td align="center">设置用于存储从UwSGI服务器接受的数据临时文件存放目录路径。安装后，可以在主配置文件中使用”uwsgi_temp_path”指令修改。</td>
+</tr>
+<tr>
+<td align="center">74</td>
+<td align="center">–http-scgi-temp-path=PATH</td>
+<td align="center">设置用于存储从SCGI服务器接受的数据临时文件存放目录路径。安装后，可以在主配置文件中使用”scgi_temp_path”指令修改。</td>
+</tr>
+<tr>
+<td align="center">75</td>
+<td align="center">–without-http</td>
+<td align="center">禁用HTTP_Core模块，该模块为Nginx的核心模块，用于提供HTTP服务所有核心功能。</td>
+</tr>
+<tr>
+<td align="center">76</td>
+<td align="center">–without-http-cache</td>
+<td align="center">禁用HTTP缓存。</td>
+</tr>
+<tr>
+<td align="center">77</td>
+<td align="center">–with-mail</td>
+<td align="center">启用HTTP_Mail_Core模块，该模块为Nginx的核心模块，用于提供POP3/IMAP4/SMTP邮件代理服务。默认情况下不构建此模块。</td>
+</tr>
+<tr>
+<td align="center">78</td>
+<td align="center">–with-mail=dynamic</td>
+<td align="center">启用HTTP_Mail_Core动态模块，允许在配置文件中通过”load_module”指令手动启用和禁用模块的使用。默认情况下不构建此模块。</td>
+</tr>
+<tr>
+<td align="center">79</td>
+<td align="center">–with-mail_ssl_module</td>
+<td align="center">启用Mail_SSL模块，用于邮件代理服务支持SSL/TLS协议，需要OpenSSL库的支持。默认情况下不构建此模块。</td>
+</tr>
+<tr>
+<td align="center">80</td>
+<td align="center">–without-mail_pop3_module</td>
+<td align="center">禁用Mail_POP3模块，当启用HTTP_Mail_Core模块时，若你不想使用POP3协议，则可以考虑单独禁用此模块。不建议禁用。</td>
+</tr>
+<tr>
+<td align="center">81</td>
+<td align="center">–without-mail_imap_module</td>
+<td align="center">禁用Mail_IMAP模块，当启用HTTP_Mail_Core模块时，若你不想使用IMAP4协议，则可以考虑单独禁用此模块。不建议禁用。</td>
+</tr>
+<tr>
+<td align="center">82</td>
+<td align="center">–without-mail_smtp_module</td>
+<td align="center">禁用Mail_SMTP模块，当启用HTTP_Mail_Core模块时，若你不想使用SMTP协议，则可以考虑单独禁用此模块。不建议禁用。</td>
+</tr>
+<tr>
+<td align="center">83</td>
+<td align="center">–with-stream</td>
+<td align="center">启用Stream_Core模块，Nginx的核心模块，用于实现TCP/UDP代理和四层负载均衡功能。默认情况下不构建此模块。此模块自Nginx1.9.0版本开始可用。</td>
+</tr>
+<tr>
+<td align="center">84</td>
+<td align="center">–with-stream=dynamic</td>
+<td align="center">启用Stream_Core动态模块，允许在配置文件中通过”load_module”指令手动启用和禁用模块的使用。默认情况下不构建此模块。</td>
+</tr>
+<tr>
+<td align="center">85</td>
+<td align="center">–with-stream_ssl_module</td>
+<td align="center">启用Stream_SSL模块，用于提供SSL/TLS协议支持，需要OpenSSL库的支持。该模块用于Nginx四层负载功能中使用，需要开启Stream_Core模块。默认情况下不构建此模块。</td>
+</tr>
+<tr>
+<td align="center">86</td>
+<td align="center">–with-stream_realip_module</td>
+<td align="center">启用Stream_Realip模块，用于修改客户端请求头中客户端IP地址值，一般用于反向代理中，将真实的客户端IP传送给后端的应用服务器。该模块用于Nginx四层负载功能中使用，需要开启Stream_Core模块。默认情况下不构建此模块。</td>
+</tr>
+<tr>
+<td align="center">87</td>
+<td align="center">–with-stream_geoip_module</td>
+<td align="center">启用Stream_Geoip模块，用于处理不同地区的访问，当来自某一个区域的访问时将其重定向到对应的服务或者项目上，需要MaxMind GeoIP库的支持。该模块用于Nginx四层负载功能中使用，需要开启Stream_Core模块。默认情况下不构建此模块。</td>
+</tr>
+<tr>
+<td align="center">88</td>
+<td align="center">–with-stream_geoip_module=dynamic</td>
+<td align="center">启用Stream_Geoip动态模块，允许在配置文件中通过”load_module”指令手动启用和禁用模块的使用。默认情况下不构建此模块。</td>
+</tr>
+<tr>
+<td align="center">89</td>
+<td align="center">–with-stream_ssl_preread_module</td>
+<td align="center">启用Stream_SSL_Preread模块，用于从客户端Hello消息中提取信息，而不会终止SSL/TLS。该模块用于Nginx四层负载功能中使用，需要开启Stream_Core模块。默认情况下不构建此模块。</td>
+</tr>
+<tr>
+<td align="center">90</td>
+<td align="center">–without-stream_limit_conn_module</td>
+<td align="center">禁用Stream_Limit_Conn模块，该模块用于限制并发连接数量以及下载带宽限制功能。该模块用于Nginx四层负载功能中使用，当开启Stream_Core模块时自动开启此功能。不建议禁用。</td>
+</tr>
+<tr>
+<td align="center">91</td>
+<td align="center">–without-stream_access_module</td>
+<td align="center">禁用Stream_Access模块，该模块用于限制对某些客户端地址的访问。该模块用于Nginx四层负载功能中使用，当开启Stream_Core模块时自动开启此功能。不建议禁用。</td>
+</tr>
+<tr>
+<td align="center">92</td>
+<td align="center">–without-stream_geo_module</td>
+<td align="center">禁用Stream_Geo模块，该模块用于从指定变量中获取客户端的IP地址，并将其嵌入到另外一个变量中。默认情况下从”$remote_addr”变量中取得客户端的IP地址。该模块用于Nginx四层负载功能中使用，当开启Stream_Core模块时自动开启此功能。不建议禁用。</td>
+</tr>
+<tr>
+<td align="center">93</td>
+<td align="center">–without-stream_map_module</td>
+<td align="center">禁用Stream_Map模块，该模块用于创建一个变量的映射表，结果变量可以是一个字符串也可以是另外一个变量。该模块用于Nginx四层负载功能中使用，当开启Stream_Core模块时自动开启此功能。不建议禁用。</td>
+</tr>
+<tr>
+<td align="center">94</td>
+<td align="center">–without-stream_split_clients_module</td>
+<td align="center">禁用Stream_Splic_Clients模块，该模块用于创建适用于A/B测试的变量，AB测试也称之为拆分测试，也就是将一个项目的两个不同版本发布，看用户更喜欢用于那个版本，若版本A受欢迎则发布版本A。该模块用于Nginx四层负载功能中使用，当开启Stream_Core模块时自动开启此功能。</td>
+</tr>
+<tr>
+<td align="center">95</td>
+<td align="center">–without-stream_return_module</td>
+<td align="center">禁用Stream_Return模块，该模块用于向客户端发送指定值，然后关闭连接。该模块用于Nginx四层负载功能中使用，当开启Stream_Core模块时自动开启此功能。不建议禁用。</td>
+</tr>
+<tr>
+<td align="center">96</td>
+<td align="center">–without-stream_upstream_hash_module</td>
+<td align="center">禁用Stream_Upstream_Hash模块，该模块提供四层负载均衡的一种调度方法，一般用于基于SessionID的会话保持场景下，当开启Stream_Core模块时自动开启此功能。不建议禁用。</td>
+</tr>
+<tr>
+<td align="center">97</td>
+<td align="center">–without-stream_upstream_least_conn_module</td>
+<td align="center">禁用Stream_Upstream_IP_Hash模块，该模块提供四层负载均衡的一种调度方法，基于来源IP的会话保持方法，由于来源IP的不稳定性，我们一般很少采用此种方法。当开启Stream_Core模块时自动开启此功能。</td>
+</tr>
+<tr>
+<td align="center">98</td>
+<td align="center">–without-stream_upstream_zone_module</td>
+<td align="center">禁用Stream_Upstream_Zone模块，该模块可以将由”Upstream”指令定义的服务器组运行时的状态存储在共享内存区域中。该模块用于Nginx四层负载功能中使用，当开启Stream_Core模块时自动开启此功能。</td>
+</tr>
+<tr>
+<td align="center">99</td>
+<td align="center">–with-google_perftools_module</td>
+<td align="center">启用Google_Perftools模块，用于可以使用Google Performance Tools分析Nginx的工作进程，分析程序性能瓶颈。该模块适用于Nginx开发人员，默认情况下不构建此模块。</td>
+</tr>
+<tr>
+<td align="center">100</td>
+<td align="center">–with-cpp_test_module</td>
+<td align="center">启用Cpp_Test模块，用于C++测试。该模块适用于Nginx开发人员，默认情况下不构建此模块。</td>
+</tr>
+<tr>
+<td align="center">101</td>
+<td align="center">–add-module=PATH</td>
+<td align="center">添加第三方模块，需要指定第三方模块所在目录路径。</td>
+</tr>
+<tr>
+<td align="center">102</td>
+<td align="center">–add-dynamic-module=PATH</td>
+<td align="center">添加第三方动态模块，需要指定第三方动态模块所在目录路径。</td>
+</tr>
+<tr>
+<td align="center">103</td>
+<td align="center">–with-compat</td>
+<td align="center">启用动态模块兼容性。</td>
+</tr>
+<tr>
+<td align="center">104</td>
+<td align="center">–with-cc=PATH</td>
+<td align="center">设置GCC编译器所在目录路径。</td>
+</tr>
+<tr>
+<td align="center">105</td>
+<td align="center">–with-cpp=PATH</td>
+<td align="center">设置GCC-C++编译器所在目录路径。</td>
+</tr>
+<tr>
+<td align="center">106</td>
+<td align="center">–with-cc-opt=OPTIONS</td>
+<td align="center">设置将添加到CFLAGS变量的其他参数</td>
+</tr>
+<tr>
+<td align="center">107</td>
+<td align="center">–with-ld-opt=OPTIONS</td>
+<td align="center">设置将在连接期间使用的其他参数</td>
+</tr>
+<tr>
+<td align="center">108</td>
+<td align="center">–with-cpu-opt=CPU</td>
+<td align="center">设置CPU型号，为特定的CPU执行编译操作，有效的值：pentium, pentiumpro, pentium3, pentium4, athlon, opteron, sparc32, sparc64,ppc64。</td>
+</tr>
+<tr>
+<td align="center">109</td>
+<td align="center">–without-pcre</td>
+<td align="center">禁用PCRE库的使用。</td>
+</tr>
+<tr>
+<td align="center">110</td>
+<td align="center">–with-pcre</td>
+<td align="center">启用PCRE库的使用。PCRE库是一个Perl库，包含Perl兼容的正则表达式。</td>
+</tr>
+<tr>
+<td align="center">111</td>
+<td align="center">–with-pcre=DIR</td>
+<td align="center">若你是源码安装的PCRE库，则需要通过此项设置PCRE库的所在目录路径。</td>
+</tr>
+<tr>
+<td align="center">112</td>
+<td align="center">–with-pcre-opt=OPTIONS</td>
+<td align="center">为PCRE设置其他要编译的选项。</td>
+</tr>
+<tr>
+<td align="center">113</td>
+<td align="center">–with-pcre-jit</td>
+<td align="center">启用”即时编译”的支持，开启此项，则会利用”pcre_jit”指令快速编译PCRE库。</td>
+</tr>
+<tr>
+<td align="center">114</td>
+<td align="center">–with-zlib=DIR</td>
+<td align="center">若你是源码安装的Zlib库，则需要通过此项设置Zlib库的所在目录路径。当启用HTTP_Gzip模块的时候需要此库的支持。</td>
+</tr>
+<tr>
+<td align="center">115</td>
+<td align="center">–with-zlib-opt=OPTIONS</td>
+<td align="center">为Zlib设置其他要编译的选项。</td>
+</tr>
+<tr>
+<td align="center">116</td>
+<td align="center">–with-zlib-asm=CPU</td>
+<td align="center">为Zlib库的编译设置特定CPU，会加快编译速度，有效值：pentium, pentiumpro。</td>
+</tr>
+<tr>
+<td align="center">117</td>
+<td align="center">–with-libatomic</td>
+<td align="center">启用Libatomic_Ops库的使用。</td>
+</tr>
+<tr>
+<td align="center">118</td>
+<td align="center">–with-libatomic=DIR</td>
+<td align="center">若你是源码安装的Libatomic_Ops库，则需要通过此项设置Libatomic_Ops库的所在目录路径。</td>
+</tr>
+<tr>
+<td align="center">119</td>
+<td align="center">–with-openssl=DIR</td>
+<td align="center">若你是源码安装的OpenSSL库，则需要通过此项设置OpenSSL库的所在目录路径。</td>
+</tr>
+<tr>
+<td align="center">120</td>
+<td align="center">–with-openssl-opt=OPTIONS</td>
+<td align="center">为OpenSSL设置其他要编译的选项。</td>
+</tr>
+<tr>
+<td align="center">121</td>
+<td align="center">–with-debug</td>
+<td align="center">启用调试级别的日志。也可以手动修改主配置文件，使用”error_log /path/to/log debug;”指令设置调试级别的日志。</td>
+</tr>
+</tbody></table>
+
+            </div>
+            <hr/>
+
+            
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/技术/">
+                                    <span class="chip bg-color">技术</span>
+                                </a>
+                            
+                                <a href="/tags/linux/">
+                                    <span class="chip bg-color">linux</span>
+                                </a>
+                            
+                                <a href="/tags/说明书/">
+                                    <span class="chip bg-color">说明书</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+        <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
+<link rel="stylesheet" href="/css/my-gitalk.css">
+
+<div class="card gitalk-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="gitalk-container" class="card-content"></div>
+</div>
+
+<script src="/libs/gitalk/gitalk.min.js"></script>
+<script>
+    let gitalk = new Gitalk({
+        clientID: 'b5ee4ffd61ba1cc8fcc6',
+        clientSecret: '4441f35b9478892ef48706461e741e1f94aec913',
+        repo: 'a878804506.github.io',
+        owner: 'a878804506',
+        admin: "a878804506",
+        id: '2019-09-20T13-59-03',
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    });
+
+    gitalk.render('gitalk-container');
+</script>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2019/09/30/linux常用命令解析(持续更新)/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="linux常用命令解析(持续更新)">
+                        
+                        <span class="card-title">linux常用命令解析(持续更新)</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            前言本篇文章是基于博主学习过程中积累的命令整理，会在职业生涯中持续更新，差不多都是常用命令，方便查阅备忘之用。
+本篇教程常用命令分类如下
+系统信息；
+系统性能；
+文件和目录；
+文件权限；
+文件查找；
+查看文件内容；
+文件处理；
+用户与权限；
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2019-09-30
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/linux/" class="post-category">
+                                    linux
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/linux/">
+                        <span class="chip bg-color">linux</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2019/09/17/nginx配置浅谈-nginx-conf/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="nginx配置浅谈-nginx.conf">
+                        
+                        <span class="card-title">nginx配置浅谈-nginx.conf</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            一、本篇教程侧重点导读
+nginx.conf配置总体说明以及示例；
+nginx安装；
+源码编译构建nginx时配置参数详细说明；
+nginx.conf中的负载均衡的配置详解；
+nginx的访问权限配置(基于ip和账号密码的两种方式)；
+ht
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-09-17
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/nginx/" class="post-category">
+                                    nginx
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/技术/">
+                        <span class="chip bg-color">技术</span>
+                    </a>
+                    
+                    <a href="/tags/环境配置/">
+                        <span class="chip bg-color">环境配置</span>
+                    </a>
+                    
+                    <a href="/tags/linux/">
+                        <span class="chip bg-color">linux</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+    
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+    <footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">年份</span>
+            <a href="http://myblog.erdongchen.top" target="_blank">陈韵辉</a>
+            <br>
+            
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                class="white-color">25k</span>&nbsp;字
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <span id="sitetime">载入运行时间...</span>
+            <script>
+                function siteTime() {
+                    window.setTimeout("siteTime()", 1000);
+                    var seconds = 1000;
+                    var minutes = seconds * 60;
+                    var hours = minutes * 60;
+                    var days = hours * 24;
+                    var years = days * 365;
+                    var today = new Date();
+                    var startYear = "2019";
+                    var startMonth = "8";
+                    var startDate = "15";
+                    var startHour = "0";
+                    var startMinute = "0";
+                    var startSecond = "0";
+                    var todayYear = today.getFullYear();
+                    var todayMonth = today.getMonth() + 1;
+                    var todayDate = today.getDate();
+                    var todayHour = today.getHours();
+                    var todayMinute = today.getMinutes();
+                    var todaySecond = today.getSeconds();
+                    var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                    var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                    var diff = t2 - t1;
+                    var diffYears = Math.floor(diff / years);
+                    var diffDays = Math.floor((diff / days) - diffYears * 365);
+                    var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                    var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                        minutes);
+                    var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                        diffMinutes * minutes) / seconds);
+                    if (startYear == todayYear) {
+                        document.getElementById("year").innerHTML = todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffDays + " 天 " + diffHours +
+                            " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    } else {
+                        document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffYears + " 年 " + diffDays +
+                            " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    }
+                }
+                setInterval(siteTime, 1000);
+            </script>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/a878804506" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:878804506@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=878804506" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 878804506" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+});
+</script>
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i["DaoVoiceObject"] = r;
+            i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o), m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            a.charset = "utf-8";
+            m.parentNode.insertBefore(a, m)
+        })(window, document, "script", ('https:' == document.location.protocol ? 'https:' : 'http:') +
+            "//widget.daovoice.io/widget/6984b559.js", "daovoice")
+        daovoice('init', {
+            app_id: "75a4e970"
+        });
+        daovoice('update');
+    </script>
+    
+
+    
+
+    
+
+    
+    <script type="text/javascript" src="/libs/background/ribbon-dynamic.js" async="async"></script>
+    
+    
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

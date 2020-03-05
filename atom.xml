@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://myblog.erdongchen.top/"/>
-  <updated>2019-09-07T07:48:54.635Z</updated>
+  <updated>2020-03-05T08:33:50.089Z</updated>
   <id>http://myblog.erdongchen.top/</id>
   
   <author>
@@ -17,17 +17,269 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>国外VPS搭建SSR教程</title>
-    <link href="http://myblog.erdongchen.top/2019/09/06/%E5%9B%BD%E5%A4%96VPS%E6%90%AD%E5%BB%BASSR%E6%95%99%E7%A8%8B/"/>
-    <id>http://myblog.erdongchen.top/2019/09/06/国外VPS搭建SSR教程/</id>
-    <published>2019-09-06T09:08:06.000Z</published>
-    <updated>2019-09-07T07:48:54.635Z</updated>
+    <title>大数据教程(四)-安装mysql</title>
+    <link href="http://myblog.erdongchen.top/2020/03/05/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%95%99%E7%A8%8B(%E5%9B%9B)-%E5%AE%89%E8%A3%85mysql/"/>
+    <id>http://myblog.erdongchen.top/2020/03/05/大数据教程(四)-安装mysql/</id>
+    <published>2020-03-05T04:06:27.000Z</published>
+    <updated>2020-03-05T08:33:50.089Z</updated>
     
     <summary type="html">
     
       
       
-        &lt;h3 id=&quot;一、本篇教程用的软件、技术和环境&quot;&gt;&lt;a href=&quot;#一、本篇教程用的软件、技术和环境&quot; class=&quot;headerlink&quot; title=&quot;一、本篇教程用的软件、技术和环境&quot;&gt;&lt;/a&gt;一、本篇教程用的软件、技术和环境&lt;/h3&gt;&lt;p&gt;1.一台国外的vps，系统：
+        &lt;h3 id=&quot;一、本篇教程侧重点导读&quot;&gt;&lt;a href=&quot;#一、本篇教程侧重点导读&quot; class=&quot;headerlink&quot; title=&quot;一、本篇教程侧重点导读&quot;&gt;&lt;/a&gt;一、本篇教程侧重点导读&lt;/h3&gt;&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;准备mysql安装包；&lt;/li
+      
+    
+    </summary>
+    
+      <category term="大数据" scheme="http://myblog.erdongchen.top/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
+    
+    
+      <category term="linux" scheme="http://myblog.erdongchen.top/tags/linux/"/>
+    
+      <category term="mysql" scheme="http://myblog.erdongchen.top/tags/mysql/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Spring Data JPA 学习总结与实战(一)-接口源码详解</title>
+    <link href="http://myblog.erdongchen.top/2020/01/09/Spring-Data-JPA-%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93%E4%B8%8E%E5%AE%9E%E6%88%98(%E4%B8%80)-%E6%8E%A5%E5%8F%A3%E6%BA%90%E7%A0%81%E8%AF%A6%E8%A7%A3/"/>
+    <id>http://myblog.erdongchen.top/2020/01/09/Spring-Data-JPA-学习总结与实战(一)-接口源码详解/</id>
+    <published>2020-01-09T06:09:32.000Z</published>
+    <updated>2020-03-05T07:17:04.935Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;写在前面&quot;&gt;&lt;a href=&quot;#写在前面&quot; class=&quot;headerlink&quot; title=&quot;写在前面&quot;&gt;&lt;/a&gt;写在前面&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;在17年的时候，我参与了一个项目用的就是spring data jpa，那时候对hebernate不是很了解（因
+      
+    
+    </summary>
+    
+      <category term="Spring Data JPA" scheme="http://myblog.erdongchen.top/categories/Spring-Data-JPA/"/>
+    
+    
+      <category term="spring全家桶" scheme="http://myblog.erdongchen.top/tags/spring%E5%85%A8%E5%AE%B6%E6%A1%B6/"/>
+    
+      <category term="框架" scheme="http://myblog.erdongchen.top/tags/%E6%A1%86%E6%9E%B6/"/>
+    
+      <category term="总结" scheme="http://myblog.erdongchen.top/tags/%E6%80%BB%E7%BB%93/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>大数据教程(三)-分布式ZooKeeper的集群搭建</title>
+    <link href="http://myblog.erdongchen.top/2019/11/27/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%95%99%E7%A8%8B(%E4%B8%89)-%E5%88%86%E5%B8%83%E5%BC%8FZooKeeper%E7%9A%84%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/"/>
+    <id>http://myblog.erdongchen.top/2019/11/27/大数据教程(三)-分布式ZooKeeper的集群搭建/</id>
+    <published>2019-11-27T10:57:12.000Z</published>
+    <updated>2020-03-05T03:23:52.428Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;一、本篇教程侧重点导读&quot;&gt;&lt;a href=&quot;#一、本篇教程侧重点导读&quot; class=&quot;headerlink&quot; title=&quot;一、本篇教程侧重点导读&quot;&gt;&lt;/a&gt;一、本篇教程侧重点导读&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;机器准备； &lt;/li&gt;
+&lt;li&gt;zoo.cfg文件配置；
+      
+    
+    </summary>
+    
+      <category term="大数据" scheme="http://myblog.erdongchen.top/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
+    
+    
+      <category term="linux" scheme="http://myblog.erdongchen.top/tags/linux/"/>
+    
+      <category term="zookeeper" scheme="http://myblog.erdongchen.top/tags/zookeeper/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>使用免费的CDN加速你的网站</title>
+    <link href="http://myblog.erdongchen.top/2019/11/25/%E4%BD%BF%E7%94%A8%E5%85%8D%E8%B4%B9%E7%9A%84CDN%E5%8A%A0%E9%80%9F%E4%BD%A0%E7%9A%84%E7%BD%91%E7%AB%99/"/>
+    <id>http://myblog.erdongchen.top/2019/11/25/使用免费的CDN加速你的网站/</id>
+    <published>2019-11-25T09:43:04.000Z</published>
+    <updated>2020-03-05T03:23:52.428Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;一、本篇教程侧重点导读&quot;&gt;&lt;a href=&quot;#一、本篇教程侧重点导读&quot; class=&quot;headerlink&quot; title=&quot;一、本篇教程侧重点导读&quot;&gt;&lt;/a&gt;一、本篇教程侧重点导读&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;拥有一个域名；&lt;/li&gt;
+&lt;li&gt;在cloudflare
+      
+    
+    </summary>
+    
+      <category term="CDN" scheme="http://myblog.erdongchen.top/categories/CDN/"/>
+    
+    
+      <category term="域名" scheme="http://myblog.erdongchen.top/tags/%E5%9F%9F%E5%90%8D/"/>
+    
+      <category term="加速" scheme="http://myblog.erdongchen.top/tags/%E5%8A%A0%E9%80%9F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>大数据教程(二)-HDFS集群安装配置并附常用命令</title>
+    <link href="http://myblog.erdongchen.top/2019/11/08/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%95%99%E7%A8%8B(%E4%BA%8C)-HDFS%E9%9B%86%E7%BE%A4%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E5%B9%B6%E9%99%84%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"/>
+    <id>http://myblog.erdongchen.top/2019/11/08/大数据教程(二)-HDFS集群安装配置并附常用命令/</id>
+    <published>2019-11-08T02:54:05.000Z</published>
+    <updated>2020-03-05T03:23:52.427Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;一、本篇教程侧重点导读&quot;&gt;&lt;a href=&quot;#一、本篇教程侧重点导读&quot; class=&quot;headerlink&quot; title=&quot;一、本篇教程侧重点导读&quot;&gt;&lt;/a&gt;一、本篇教程侧重点导读&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;hadoop集群部署服务器规划；&lt;/li&gt;
+&lt;li&gt;ha
+      
+    
+    </summary>
+    
+      <category term="大数据" scheme="http://myblog.erdongchen.top/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
+    
+    
+      <category term="linux" scheme="http://myblog.erdongchen.top/tags/linux/"/>
+    
+      <category term="HDFS" scheme="http://myblog.erdongchen.top/tags/HDFS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>初探-搭建 ELK+Filebeat 分布式日志采集分析平台</title>
+    <link href="http://myblog.erdongchen.top/2019/10/25/%E5%88%9D%E6%8E%A2-%E6%90%AD%E5%BB%BA-ELK-Filebeat-%E5%88%86%E5%B8%83%E5%BC%8F%E6%97%A5%E5%BF%97%E9%87%87%E9%9B%86%E5%88%86%E6%9E%90%E5%B9%B3%E5%8F%B0/"/>
+    <id>http://myblog.erdongchen.top/2019/10/25/初探-搭建-ELK-Filebeat-分布式日志采集分析平台/</id>
+    <published>2019-10-25T09:58:20.000Z</published>
+    <updated>2020-03-05T03:23:52.426Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;本篇教程侧重点导读&quot;&gt;&lt;a href=&quot;#本篇教程侧重点导读&quot; class=&quot;headerlink&quot; title=&quot;* 本篇教程侧重点导读&quot;&gt;&lt;/a&gt;* 本篇教程侧重点导读&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;教程涉及到的软件，技术，&lt;/li&gt;
+&lt;li&gt;ELK日志采集分析平
+      
+    
+    </summary>
+    
+      <category term="linux" scheme="http://myblog.erdongchen.top/categories/linux/"/>
+    
+    
+      <category term="环境搭建" scheme="http://myblog.erdongchen.top/tags/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"/>
+    
+      <category term="技术" scheme="http://myblog.erdongchen.top/tags/%E6%8A%80%E6%9C%AF/"/>
+    
+      <category term="日志分析平台" scheme="http://myblog.erdongchen.top/tags/%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90%E5%B9%B3%E5%8F%B0/"/>
+    
+      <category term="ELK" scheme="http://myblog.erdongchen.top/tags/ELK/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>linux常用命令解析(持续更新)</title>
+    <link href="http://myblog.erdongchen.top/2019/09/30/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E8%A7%A3%E6%9E%90(%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0)/"/>
+    <id>http://myblog.erdongchen.top/2019/09/30/linux常用命令解析(持续更新)/</id>
+    <published>2019-09-30T02:22:32.000Z</published>
+    <updated>2020-03-05T03:23:52.426Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h3&gt;&lt;p&gt;本篇文章是基于博主学习过程中积累的命令整理，会在职业生涯中持续更新，差不多都是常用命令，方便查阅备忘之用。&lt;/p&gt;
+&lt;h3 id=&quot;本篇教程
+      
+    
+    </summary>
+    
+      <category term="linux" scheme="http://myblog.erdongchen.top/categories/linux/"/>
+    
+    
+      <category term="linux" scheme="http://myblog.erdongchen.top/tags/linux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>nginx配置浅谈-configure的参数配置说明</title>
+    <link href="http://myblog.erdongchen.top/2019/09/20/nginx%E9%85%8D%E7%BD%AE%E6%B5%85%E8%B0%88-configure%E7%9A%84%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE%E8%AF%B4%E6%98%8E/"/>
+    <id>http://myblog.erdongchen.top/2019/09/20/nginx配置浅谈-configure的参数配置说明/</id>
+    <published>2019-09-20T05:59:03.000Z</published>
+    <updated>2020-03-05T03:23:52.425Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;参数说明&quot;&gt;&lt;a href=&quot;#参数说明&quot; class=&quot;headerlink&quot; title=&quot;参数说明&quot;&gt;&lt;/a&gt;参数说明&lt;/h3&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align=&quot;center&quot;&gt;序号&lt;/th&gt;
+&lt;th align=&quot;center
+      
+    
+    </summary>
+    
+      <category term="nginx" scheme="http://myblog.erdongchen.top/categories/nginx/"/>
+    
+    
+      <category term="技术" scheme="http://myblog.erdongchen.top/tags/%E6%8A%80%E6%9C%AF/"/>
+    
+      <category term="linux" scheme="http://myblog.erdongchen.top/tags/linux/"/>
+    
+      <category term="说明书" scheme="http://myblog.erdongchen.top/tags/%E8%AF%B4%E6%98%8E%E4%B9%A6/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>nginx配置浅谈-nginx.conf</title>
+    <link href="http://myblog.erdongchen.top/2019/09/17/nginx%E9%85%8D%E7%BD%AE%E6%B5%85%E8%B0%88-nginx-conf/"/>
+    <id>http://myblog.erdongchen.top/2019/09/17/nginx配置浅谈-nginx-conf/</id>
+    <published>2019-09-17T10:25:40.000Z</published>
+    <updated>2020-03-05T03:23:52.424Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;一、本篇教程侧重点导读&quot;&gt;&lt;a href=&quot;#一、本篇教程侧重点导读&quot; class=&quot;headerlink&quot; title=&quot;一、本篇教程侧重点导读&quot;&gt;&lt;/a&gt;一、本篇教程侧重点导读&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;nginx.conf配置总体说明以及示例；&lt;/li&gt;
+&lt;
+      
+    
+    </summary>
+    
+      <category term="nginx" scheme="http://myblog.erdongchen.top/categories/nginx/"/>
+    
+    
+      <category term="技术" scheme="http://myblog.erdongchen.top/tags/%E6%8A%80%E6%9C%AF/"/>
+    
+      <category term="环境配置" scheme="http://myblog.erdongchen.top/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"/>
+    
+      <category term="linux" scheme="http://myblog.erdongchen.top/tags/linux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>国外VPS搭建SSR教程</title>
+    <link href="http://myblog.erdongchen.top/2019/09/06/%E5%9B%BD%E5%A4%96VPS%E6%90%AD%E5%BB%BASSR%E6%95%99%E7%A8%8B/"/>
+    <id>http://myblog.erdongchen.top/2019/09/06/国外VPS搭建SSR教程/</id>
+    <published>2019-09-06T09:08:06.000Z</published>
+    <updated>2020-03-05T03:23:52.423Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;一、本篇教程用的软件、技术和环境&quot;&gt;&lt;a href=&quot;#一、本篇教程用的软件、技术和环境&quot; class=&quot;headerlink&quot; title=&quot;一、本篇教程用的软件、技术和环境&quot;&gt;&lt;/a&gt;一、本篇教程用的软件、技术和环境&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;一台国外的vps
       
     
     </summary>
@@ -44,17 +296,18 @@
   </entry>
   
   <entry>
-    <title>大数据学习（一）-基础配置</title>
-    <link href="http://myblog.erdongchen.top/2019/08/29/%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%80%EF%BC%89-%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE/"/>
-    <id>http://myblog.erdongchen.top/2019/08/29/大数据学习（一）-基础配置/</id>
+    <title>大数据教程(一)-基础配置</title>
+    <link href="http://myblog.erdongchen.top/2019/08/29/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%95%99%E7%A8%8B(%E4%B8%80)-%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE/"/>
+    <id>http://myblog.erdongchen.top/2019/08/29/大数据教程(一)-基础配置/</id>
     <published>2019-08-29T06:44:51.000Z</published>
-    <updated>2019-09-07T07:48:54.634Z</updated>
+    <updated>2020-03-05T03:23:52.422Z</updated>
     
     <summary type="html">
     
       
       
-        &lt;h3 id=&quot;一、本篇教程侧重点导读&quot;&gt;&lt;a href=&quot;#一、本篇教程侧重点导读&quot; class=&quot;headerlink&quot; title=&quot;一、本篇教程侧重点导读&quot;&gt;&lt;/a&gt;一、本篇教程侧重点导读&lt;/h3&gt;&lt;p&gt;1.使用VMware虚拟出几台服务器后对网络的配置，主要是为了连通物
+        &lt;h3 id=&quot;一、本篇教程侧重点导读&quot;&gt;&lt;a href=&quot;#一、本篇教程侧重点导读&quot; class=&quot;headerlink&quot; title=&quot;一、本篇教程侧重点导读&quot;&gt;&lt;/a&gt;一、本篇教程侧重点导读&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;使用VMware虚拟出几台服务器后对网络的配置，主要是为
       
     
     </summary>
@@ -75,13 +328,15 @@
     <link href="http://myblog.erdongchen.top/2019/08/15/howToCreateBlog/"/>
     <id>http://myblog.erdongchen.top/2019/08/15/howToCreateBlog/</id>
     <published>2019-08-15T09:21:12.000Z</published>
-    <updated>2019-09-07T07:48:54.633Z</updated>
+    <updated>2020-03-05T03:23:52.422Z</updated>
     
     <summary type="html">
     
       
       
-        &lt;h3 id=&quot;本套博客搭建教程的前置条件：&quot;&gt;&lt;a href=&quot;#本套博客搭建教程的前置条件：&quot; class=&quot;headerlink&quot; title=&quot;本套博客搭建教程的前置条件：&quot;&gt;&lt;/a&gt;本套博客搭建教程的前置条件：&lt;/h3&gt;&lt;p&gt;&amp;emsp;&amp;emsp;1、域名一个；&lt;br
+        &lt;h3 id=&quot;本套博客搭建教程的前置条件：&quot;&gt;&lt;a href=&quot;#本套博客搭建教程的前置条件：&quot; class=&quot;headerlink&quot; title=&quot;本套博客搭建教程的前置条件：&quot;&gt;&lt;/a&gt;本套博客搭建教程的前置条件：&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;域名一个；&lt;/li&gt;
+&lt;li&gt;g
       
     
     </summary>
