@@ -4,14 +4,19 @@
 
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="nginx配置浅谈-nginx.conf, 云辉相映">
+    <meta name="keywords" content="大数据教程(五)-yarn的环境配置, 云辉相映">
     <meta name="description" content="一、本篇教程侧重点导读
-nginx.conf配置总体说明以及示例；
-nginx安装；
-源码编译构建nginx时配置参数详细说明；
-nginx.conf中的负载均衡的配置详解；
-nginx的访问权限配置(基于ip和账号密码的两种方式)；
-ht">
+
+yarn的快速理解；
+yarn的安装位置解析；
+yarn配置文件与启动；
+yarn配置说明；
+
+
+二、本篇教程用的软件、技术和说明
+
+yarn是在hadoop安装包里面启动，所以版本跟hadoop的版本一致；
+li">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -19,7 +24,7 @@ ht">
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>nginx配置浅谈-nginx.conf | 云辉相映</title>
+    <title>大数据教程(五)-yarn的环境配置 | 云辉相映</title>
     <link rel="icon" type="image/jpeg" href="/my.jpeg">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -344,13 +349,13 @@ ht">
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/7.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/10.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        nginx配置浅谈-nginx.conf
+                        大数据教程(五)-yarn的环境配置
                     </div>
                 </div>
             </div>
@@ -468,16 +473,12 @@ ht">
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/技术/">
-                                <span class="chip bg-color">技术</span>
-                            </a>
-                        
-                            <a href="/tags/环境配置/">
-                                <span class="chip bg-color">环境配置</span>
-                            </a>
-                        
                             <a href="/tags/linux/">
                                 <span class="chip bg-color">linux</span>
+                            </a>
+                        
+                            <a href="/tags/yarn/">
+                                <span class="chip bg-color">yarn</span>
                             </a>
                         
                     </div>
@@ -488,8 +489,8 @@ ht">
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/nginx/" class="post-category">
-                                nginx
+                            <a href="/categories/大数据/" class="post-category">
+                                大数据
                             </a>
                         
                     </div>
@@ -501,28 +502,28 @@ ht">
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2019-09-17
+                    2020-03-08
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-03-05
+                    2020-03-08
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    3.2k
+                    779
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    12 分
+                    3 分
                 </div>
                 
 				
@@ -538,348 +539,99 @@ ht">
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3 id="一、本篇教程侧重点导读"><a href="#一、本篇教程侧重点导读" class="headerlink" title="一、本篇教程侧重点导读"></a>一、本篇教程侧重点导读</h3><ol>
-<li>nginx.conf配置总体说明以及示例；</li>
-<li>nginx安装；</li>
-<li>源码编译构建nginx时配置参数详细说明；</li>
-<li>nginx.conf中的负载均衡的配置详解；</li>
-<li>nginx的访问权限配置(基于ip和账号密码的两种方式)；</li>
-<li>https的访问配置；</li>
-<li>新增stream模块以支持tcp代理(2019.12.03)；</li>
-</ol>
-<h3 id="二、本篇教程用的软件、技术和说明"><a href="#二、本篇教程用的软件、技术和说明" class="headerlink" title="二、本篇教程用的软件、技术和说明"></a>二、本篇教程用的软件、技术和说明</h3><ol>
-<li>使用到linux系统：CentOS 7.2；</li>
-<li>使用到的nginx版本：1.15.2</li>
-</ol>
-<h3 id="三、nginx-conf配置总体说明以及示例"><a href="#三、nginx-conf配置总体说明以及示例" class="headerlink" title="三、nginx.conf配置总体说明以及示例"></a>三、nginx.conf配置总体说明以及示例</h3><ol>
-<li><strong><font color="green">全局块</font></strong>：配置影响nginx全局的指令。一般有运行nginx服务器的用户组，nginx进程pid存放路径，日志存放路径，配置文件引入，允许生成worker process数等。</li>
-<li><strong><font color="green">events块</font></strong>：配置影响nginx服务器或与用户的网络连接。有每个进程的最大连接数，选取哪种事件驱动模型处理连接请求，是否允许同时接受多个网路连接，开启多个网络连接序列化等。</li>
-<li><strong><font color="green">http块</font></strong>：可以嵌套多个server，配置代理，缓存，日志定义等绝大多数功能和第三方模块的配置。如文件引入，mime-type定义，日志自定义，是否使用sendfile传输文件，连接超时时间，单连接请求数等。</li>
-<li><strong><font color="green">server块</font></strong>：配置虚拟主机的相关参数，一个http中可以有多个server。</li>
-<li><strong><font color="green">location块</font></strong>：配置请求的路由，以及各种页面的处理情况。</li>
-<li><strong><font color="green">upstream块</font></strong>：用来配置后台服务器负载均衡用的。<br><a href="http://staticfile.erdongchen.top/download/config.example.conf?n=nginx" title="点击下载nginx.conf" target="_blank" rel="noopener"><strong><font color="purple">nginx.conf配置文件示例下载</font></strong></a><img style="width:85%;height:85%" src="http://staticfile.erdongchen.top/blog/blogPicture/20190917/config.example.png" align="left/">
-
-</li>
-</ol>
-<h3 id="四、nginx安装"><a href="#四、nginx安装" class="headerlink" title="四、nginx安装"></a>四、nginx安装</h3><ol>
-<li>安装编译环境<pre class=" language-bash"><code class="language-bash">yum -y <span class="token function">install</span> gcc
-yum -y <span class="token function">install</span> gcc++
-yum -y <span class="token function">install</span> gcc-c++
-yum -y <span class="token function">install</span> <span class="token function">wget</span>
-yum -y <span class="token function">install</span> pcre-devel
-yum -y <span class="token function">install</span> zlib zlib-devel
-<span class="token comment" spellcheck="true"># https配置需要</span>
-yum -y <span class="token function">install</span> openssl openssl-devel</code></pre>
-</li>
-<li>下载nginx安装包<br>建议下载稳定版本（Stable version）：<a href="http://nginx.org/en/download.html" title="点击下载" target="_blank" rel="noopener">nginx官网下载</a>,然后把包上传到linux上<br><font color="red">或者</font>在linux使用如下命令下载nginx-1.16.1安装包：<pre class=" language-bash"><code class="language-bash"><span class="token function">wget</span> http://nginx.org/download/nginx-1.16.1.tar.gz</code></pre>
-</li>
-<li>解压nginx安装包<pre class=" language-bash"><code class="language-bash"><span class="token function">tar</span> -xzvf nginx-1.16.1.tar.gz -C /usr/local/</code></pre>
-<font color="green">参数 -C 解压到指定路径下</font></li>
-<li>源码编译安装nginx<pre class=" language-bash"><code class="language-bash"><span class="token comment" spellcheck="true"># 进入nginx目录</span>
-<span class="token function">cd</span> /usr/local/nginx-1.16.1
-<span class="token comment" spellcheck="true"># 小白推荐执行命令</span>
-<span class="token function">bash</span> configure
-<span class="token comment" spellcheck="true"># 老鸟推荐执行脚本(带https配置、可自定义配置各类参数)</span>
-<span class="token function">bash</span> configure --prefix<span class="token operator">=</span>/usr/local/nginx --sbin-path<span class="token operator">=</span>/usr/local/nginx/sbin/nginx --conf-path<span class="token operator">=</span>/usr/local/nginx/conf/nginx.conf --error-log-path<span class="token operator">=</span>/usr/local/nginx/logs/error.log --http-log-path<span class="token operator">=</span>/usr/local/nginx/logs/access.log --pid-path<span class="token operator">=</span>/usr/local/nginx/logs/nginx.pid --lock-path<span class="token operator">=</span>/usr/local/nginx/lock/nginx.lock --user<span class="token operator">=</span>root --group<span class="token operator">=</span>root --with-http_ssl_module --with-http_realip_module --with-http_stub_status_module --with-http_gzip_static_module  --with-debug --http-client-body-temp-path<span class="token operator">=</span>/usr/local/nginx/temp --with-stream
-<span class="token comment" spellcheck="true"># 执行命令</span>
-<span class="token function">make</span>
-<span class="token comment" spellcheck="true"># 执行make install命令</span>
-<span class="token function">make</span> <span class="token function">install</span></code></pre>
-</li>
-<li>配置环境变量<pre class=" language-bash"><code class="language-bash"><span class="token comment" spellcheck="true"># 编辑  /etc/profile</span>
-vim /etc/profile
-<span class="token comment" spellcheck="true"># 在末尾追加</span>
-<span class="token function">export</span> NGINX_HOME<span class="token operator">=</span>/usr/local/nginx
-<span class="token function">export</span> PATH<span class="token operator">=</span><span class="token variable">$PATH</span><span class="token keyword">:</span><span class="token variable">$NGINX_HOME</span>/sbin
-<span class="token comment" spellcheck="true"># 重新编译 /etc/profile 文件</span>
-<span class="token function">source</span> /etc/profile</code></pre>
-<font color="red">防坑：/usr/local/nginx 是你安装nginx的目录</font></li>
-<li>安装验证,利用nginx -v 来查看安装是否正确，以及相关的nginx信息。<pre class=" language-bash"><code class="language-bash">nginx -v</code></pre>
-</li>
-<li>根据具体项目所需配置nginx.conf文件</li>
-<li>nginx相关命令<pre class=" language-bash"><code class="language-bash"><span class="token comment" spellcheck="true"># Nginx检测</span>
-nginx -t
-<span class="token comment" spellcheck="true"># 启动</span>
-nginx
-<span class="token comment" spellcheck="true"># 平滑重启</span>
-nginx -s reload
-<span class="token comment" spellcheck="true"># 快速停止（立即停止服务,这种方法比较强硬，无论进程是否在工作，都直接停止进程。）</span>
-nginx -s stop
-<span class="token comment" spellcheck="true"># 正常停止（从容停止服务,这种方法较stop相比就比较温和一些了，需要进程完成当前工作后再停止。）</span>
-nginx -s quit</code></pre>
-</li>
-</ol>
-<h3 id="五、源码编译构建nginx时配置参数详细说明"><a href="#五、源码编译构建nginx时配置参数详细说明" class="headerlink" title="五、源码编译构建nginx时配置参数详细说明"></a>五、源码编译构建nginx时配置参数详细说明</h3><ol>
-<li>在解压的目录有个文件configure，运行./configure –-help 可以看到大量的参数显示。</li>
-<li>configure的参数分为四大类：路径相关、编译相关、依赖软件相关、模块相关<br><a href="https://myblog.erdongchen.top/2019/09/20/nginx配置浅谈-configure的参数配置说明/" title="查看详情"><strong><font color="red">configure参数配置说明书</font></strong></a></li>
-</ol>
-<h3 id="六、nginx-conf中的负载均衡的配置详解"><a href="#六、nginx-conf中的负载均衡的配置详解" class="headerlink" title="六、nginx.conf中的负载均衡的配置详解"></a>六、nginx.conf中的负载均衡的配置详解</h3><p>负载均衡一般配置在upstream块中，负载均衡的几种方式：</p>
+                <h3 id="一、本篇教程侧重点导读"><a href="#一、本篇教程侧重点导读" class="headerlink" title="一、本篇教程侧重点导读"></a>一、本篇教程侧重点导读</h3><blockquote>
 <ol>
-<li>轮询（默认）<br>每个请求会按时间顺序逐一分配到不同的后端服务器。在轮询中，如果服务器down掉了，会自动剔除该服务器。<font color="red">缺省配置就是轮询策略</font>。此策略适合服务器配置相当，无状态且短平快的服务使用。</li>
-<li>weight（权重）<br>在轮询策略的基础上指定轮询的几率。权重越高分配到需要处理的请求越多。此策略可以与ip_hash和least_conn结合使用。此策略比较适合服务器的硬件配置差别比较大的情况。<br>eg：<pre><code># 动态负载均衡服务器组
-upstream dynamic_balance {
- server localhost:8080 weight=2;
- server localhost:8081 weight=5;
- server localhost:8082 weight=3;
-}</code></pre></li>
-<li>ip_hash（根据ip分配）<br>指定负载均衡器按照基于客户端IP的分配方式，这个方法确保了相同的客户端的请求一直发送到相同的服务器，以保证session会话。这样每个访客都固定访问一个后端服务器，可以解决session不能跨服务器的问题。在Nginx版本1.3.1之前，不能在ip_hash中使用权重（weight）。ip_hash不能与backup同时使用。此策略适合有状态服务，比如session。当有服务器需要剔除，必须手动down掉。<br>eg:<pre><code>upstream dynamic_balance {
- ip_hash;    # 保证每个访客固定访问一个后端服务器
- server localhost:8080 weight=2;
- server localhost:8081;
- server localhost:8082;
-}</code></pre></li>
-<li>least_conn（最少连接）<br>把请求转发给连接数较少的后端服务器。轮询算法是把请求平均的转发给各个后端，使它们的负载大致相同；但是，有些请求占用的时间很长，会导致其所在的后端负载较高。这种情况下，least_conn这种方式就可以达到更好的负载均衡效果。此负载均衡策略适合请求处理时间长短不一造成服务器过载的情况。<br>eg:<pre><code>upstream dynamic_balance {
- least_conn;    # 把请求转发给连接数较少的后端服务器
- server localhost:8080 weight=2;
- server localhost:8081;
- server localhost:8082;
-}</code></pre></li>
-<li>fair（响应时间 - 第三方）<br>按后端服务器的响应时间来分配请求，响应时间短的优先分配。<br>eg:<pre><code>upstream resinserver{
- server server1;
- server server2;
- fair;
-}</code></pre></li>
-<li>url_hash（根据url分配 - 第三方）<br>按访问url的hash结果来分配请求，使每个url定向到同一个后端服务器，后端服务器为缓存时比较有效。例：在upstream中加入hash语句，server语句中不能写入weight等其他的参数，hash_method是使用的hash算法<br>eg:<pre><code>upstream resinserver{
- server squid1:3128;
- server squid2:3128;
- hash $request_uri;
- hash_method crc32;
-}</code></pre>参数说明：<table>
-<thead>
-<tr>
-<th align="center">参数名称</th>
-<th align="center">参数含义</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">fail_timeout</td>
-<td align="center">与max_fails结合使用。</td>
-</tr>
-<tr>
-<td align="center">max_fails</td>
-<td align="center">设置在fail_timeout参数设置的时间内最大失败次数，如果在这个时间内，所有针对该服务器的请求都失败了，那么认为该服务器会被认为是停机了。</td>
-</tr>
-<tr>
-<td align="center">fail_time</td>
-<td align="center">服务器会被认为停机的时间长度，默认为10s。</td>
-</tr>
-<tr>
-<td align="center">backup</td>
-<td align="center">标记该服务器为备用服务器。当主服务器停止时，请求会被发送到它这里。</td>
-</tr>
-<tr>
-<td align="center">down</td>
-<td align="center">标记服务器永久停机了。</td>
-</tr>
-</tbody></table>
-</li>
+<li>yarn的快速理解；</li>
+<li>yarn的安装位置解析；</li>
+<li>yarn配置文件与启动；</li>
+<li>yarn配置说明；</li>
 </ol>
-<h3 id="七、nginx的访问权限配置"><a href="#七、nginx的访问权限配置" class="headerlink" title="七、nginx的访问权限配置"></a>七、nginx的访问权限配置</h3><ol>
-<li>基于ip的配置<br>介绍： 访问权限可以通过配置基于ip的访问控制，达到让某些ip能够访问，限制哪些ip不能访问的效果<br><br>允许访问的配置方法<br>配置语法：allow address | CIDR | unix | all;<br>默认配置：没有配置<br>配置路径：http、server、location、limit_except下；<br><br>不允许访问的配置方法<br>配置语法：deny address | CIDR | unix | all;<br>默认配置：没有配置<br>配置路径：http、server、location、limit_except下；</li>
+</blockquote>
+<h3 id="二、本篇教程用的软件、技术和说明"><a href="#二、本篇教程用的软件、技术和说明" class="headerlink" title="二、本篇教程用的软件、技术和说明"></a>二、本篇教程用的软件、技术和说明</h3><blockquote>
+<ol>
+<li>yarn是在hadoop安装包里面启动，所以版本跟hadoop的版本一致；</li>
+<li>linux系统：CentOS 7.2；</li>
 </ol>
-<p>例子：</p>
-<pre><code>location {
-    # 拒绝此IP访问
-    deny 192.168.1.1;
-    # 允许该网段访问
-    allow 192.168.1.0/24;
-    # 拒绝所有
-    deny all;
-}</code></pre><p><font color="red">从上到下开始匹配，匹配到了则停止。</font></p>
-<ol start="2">
-<li>基于账号密码的配置<br>①. 安装软件httpd<pre class=" language-bash"><code class="language-bash">yum -y <span class="token function">install</span> httpd</code></pre>
-②. 创建密码文件<pre class=" language-bash"><code class="language-bash"><span class="token comment" spellcheck="true"># /usr/local/nginx1.16.1/mypasswd 生成密码文件的全路径</span>
-<span class="token comment" spellcheck="true"># test 用户名</span>
-<span class="token comment" spellcheck="true"># 123456 密码</span>
-htpasswd -c -b /usr/local/nginx1.16.1/mypasswd  <span class="token function">test</span>  123456</code></pre>
-③. 配置nginx.conf<br>需要配置的参数：<strong><font color="purple">auth_basic、auth_basic_user_file</font></strong><br>参数说明：<table>
-<thead>
-<tr>
-<th align="center">参数名</th>
-<th align="center">配置语法</th>
-<th align="center">默认配置</th>
-<th align="center">可配置的区域块</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">auth_basic</td>
-<td align="center">string or off</td>
-<td align="center">off</td>
-<td align="center">http、server、location</td>
-</tr>
-<tr>
-<td align="center">auth_basic_user_file</td>
-<td align="center">密码路径</td>
-<td align="center">/</td>
-<td align="center">http、server、location</td>
-</tr>
-</tbody></table>
-</li>
+</blockquote>
+<h3 id="三、yarn的快速理解"><a href="#三、yarn的快速理解" class="headerlink" title="三、yarn的快速理解"></a>三、yarn的快速理解</h3><p>&#160; &#160;yarn是一个分布式程序的运行调度平台<br>&#160; &#160;yarn中有两大核心角色：</p>
+<ol>
+<li>主节点：<strong>Resource Manager</strong>  &#160;(<strong><font color="red">1</font></strong>台)<br>接受用户提交的分布式计算程序，并为其划分资源；管理、监控各个Node Manager上的资源情况，以便于均衡负载；<br>Resource Manager一般安装在一台专门的机器上</li>
+<li>从节点：<strong>Node Manager</strong> &#160;(<strong><font color="red">N</font></strong>台)<br>管理它所在机器的运算资源（cpu + 内存）；负责接受Resource Manager分配的任务，创建容器、回收资源；<br>Node Manager应该与HDFS中的data node重叠在一起，Node Manager启动多少台是根据在<code>$HADOOP_HOME/etc/hadoop/workers</code> 里面配置的信息</li>
 </ol>
-<p>账号密码配置示例：</p>
-<pre><code>server {
-    listen       80;
-    server_name  staticfile.erdongchen.top;
-    charset utf-8;
-
-    # 目录
-    root /usr/local/staticFiles;
-    #开启目录文件列表
-    autoindex on;
-    # 显示出文件的确切大小，单位是bytes
-    autoindex_exact_size on;
-    # 显示的文件时间为文件的服务器时间
-    autoindex_localtime on;
-
-    location /web/excelAddr/ {
-        # 这里是验证时的提示信息
-        auth_basic &quot;Please input password&quot;;
-        # 密码文件所在的位置
-        auth_basic_user_file /usr/local/mypasswd;
-    }
-
-    location /files_bak/ {
-        deny all; # 不允许访问
-    }
-
-    error_page   500 502 503 504  /50x.html;
-    location = /50x.html {
-        root   html;
-    }
-}</code></pre><p>④. 最终效果图<br><img style="width:85%;height:85%" src="https://staticfile.erdongchen.top/blog/blogPicture/20190917/authority_file.png" align="left/"></p>
-<h4 id="附：htpasswd命令及其参数含义说明"><a href="#附：htpasswd命令及其参数含义说明" class="headerlink" title="附：htpasswd命令及其参数含义说明"></a>附：htpasswd命令及其参数含义说明</h4><p>命令：</p>
-<pre class=" language-bash"><code class="language-bash"><span class="token comment" spellcheck="true"># 创建密码文件并且添加用户，</span>
-htpasswd -c  -b  文件名 用户名   密码
-<span class="token comment" spellcheck="true"># 添加用户不创建文件</span>
-htpasswd  -b   用户名   密码
-<span class="token comment" spellcheck="true"># 删除用户和密码</span>
-htpasswd -D  文件名   用户名
-<span class="token comment" spellcheck="true"># 修改密码 ：就是删除用户然后创建用户</span>
-htpasswd -D  文件名   用户名
-htpasswd  -b   用户名   密码</code></pre>
-<p>参数含义：</p>
+<h3 id="四、yarn的安装位置解析"><a href="#四、yarn的安装位置解析" class="headerlink" title="四、yarn的安装位置解析"></a>四、yarn的安装位置解析</h3><p>&#160;&#160;yarn如3.2所述，在结合我的机器现有部署的程序，我的master启动的是NameNode、DataNode，slave1、slave2启动的是DataNode，所以yarn的NodeManager节点应该安装在master、slave1、slave2上，理论上ResourceManager应该单独一台服务器部署，但是在我这，我就把yarn的主节点安装在master，方便管理(主要是服务器不够用)<br>&#160;&#160;yarn最终yarn的部署方案如下：</p>
 <table>
 <thead>
 <tr>
-<th align="center">参数名</th>
-<th align="center">配置语法</th>
+<th align="center">服务器</th>
+<th align="center">部署yarn节点</th>
 </tr>
 </thead>
 <tbody><tr>
-<td align="center">-c</td>
-<td align="center">创建加密文件</td>
+<td align="center">master</td>
+<td align="center">Resource Manager、DataNode</td>
 </tr>
 <tr>
-<td align="center">-n</td>
-<td align="center">不更新加密文件，只将加密的用户密码显示在屏幕上</td>
+<td align="center">slave1</td>
+<td align="center">DataNode</td>
 </tr>
 <tr>
-<td align="center">-m</td>
-<td align="center">默认采用MD5算法进行加密</td>
-</tr>
-<tr>
-<td align="center">-d</td>
-<td align="center">采用CRYPT算法对密码进行加密</td>
-</tr>
-<tr>
-<td align="center">-p</td>
-<td align="center">不对密码进行加密 ，即明文密码</td>
-</tr>
-<tr>
-<td align="center">-s</td>
-<td align="center">采用SHA算法对密码进行加密</td>
-</tr>
-<tr>
-<td align="center">-b</td>
-<td align="center">在命令行中一并输入用户名和密码而不是根据提示输入密码</td>
-</tr>
-<tr>
-<td align="center">-D</td>
-<td align="center">删除指定的用户</td>
+<td align="center">slave2</td>
+<td align="center">DataNode</td>
 </tr>
 </tbody></table>
-<h3 id="八、https的访问配置"><a href="#八、https的访问配置" class="headerlink" title="八、https的访问配置"></a>八、https的访问配置</h3><ol>
-<li><p>查看是否有ssl模块</p>
-<pre class=" language-bash"><code class="language-bash">nginx -V</code></pre>
-<img style="width:85%;height:85%" src="https://staticfile.erdongchen.top/blog/blogPicture/20190917/qianzhi.png" align="left/"></li>
-<li><p>如果没有上面这个就需要添加此模块：<br>nginx解压目录执行：</p>
-<pre class=" language-bash"><code class="language-bash">./configure --with-http_ssl_module
-<span class="token function">make</span></code></pre>
-<p>此时，在objs下回生成新的nginx文件，覆盖到安装目录的sbin目录下面<br><strong><font color="red">防坑：在执行完make命令后，如果不执行make install则是添加模块，就需要把新的nginx文件覆盖到安装目录的sbin目录下！！如果接着执行make install，则表示重新安装nginx！</font></strong></p>
+<h3 id="五、yarn配置文件与启动"><a href="#五、yarn配置文件与启动" class="headerlink" title="五、yarn配置文件与启动"></a>五、yarn配置文件与启动</h3><ol>
+<li><p>修改配置文件：编辑<code>$HADOOP_HOME/etc/hadoop/yarn-site.xml</code>，增加以下内容</p>
+<pre class=" language-xml"><code class="language-xml"> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>property</span><span class="token punctuation">></span></span>
+     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>name</span><span class="token punctuation">></span></span>yarn.resourcemanager.hostname<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>name</span><span class="token punctuation">></span></span>
+     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>value</span><span class="token punctuation">></span></span>master<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>value</span><span class="token punctuation">></span></span>
+ <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>property</span><span class="token punctuation">></span></span>
+
+ <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>property</span><span class="token punctuation">></span></span>
+     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>name</span><span class="token punctuation">></span></span>yarn.nodemanager.aux-services<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>name</span><span class="token punctuation">></span></span>
+     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>value</span><span class="token punctuation">></span></span>mapreduce_shuffle<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>value</span><span class="token punctuation">></span></span>
+ <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>property</span><span class="token punctuation">></span></span>
+
+ <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>property</span><span class="token punctuation">></span></span>
+     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>name</span><span class="token punctuation">></span></span>yarn.nodemanager.resource.memory-mb<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>name</span><span class="token punctuation">></span></span>
+     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>value</span><span class="token punctuation">></span></span>1024<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>value</span><span class="token punctuation">></span></span>
+ <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>property</span><span class="token punctuation">></span></span>
+
+ <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>property</span><span class="token punctuation">></span></span>
+     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>name</span><span class="token punctuation">></span></span>yarn.nodemanager.resource.cpu-vcores<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>name</span><span class="token punctuation">></span></span>
+     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>value</span><span class="token punctuation">></span></span>1<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>value</span><span class="token punctuation">></span></span>
+ <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>property</span><span class="token punctuation">></span></span></code></pre>
 </li>
-<li><p>SSL证书申请，并放置到服务器上<br>证书申请可以在阿里云上申请或者腾讯云上也可以申请，有免费的，实在不行还可以自己创建证书；<br>阿里云申请地址：<a href="https://www.aliyun.com/product/cas" title="阿里云" target="_blank" rel="noopener"><strong><font color="purple">申请</font></strong></a></p>
+<li><p>保存好yarn-site.xml后，将该文件复制到slave1、slave2的目录下：</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token comment" spellcheck="true">#复制到slave1</span>
+<span class="token function">scp</span> /usr/local/hadoop-3.2.1/etc/hadoop/yarn-site.xml root@slave1:/usr/local/hadoop-3.2.1/etc/hadoop/
+<span class="token comment" spellcheck="true">#复制到slave2</span>
+<span class="token function">scp</span> /usr/local/hadoop-3.2.1/etc/hadoop/yarn-site.xml root@slave2:/usr/local/hadoop-3.2.1/etc/hadoop/</code></pre>
 </li>
-<li><p>nginx.conf配置中配置SSL实现https访问<br>配置示例：</p>
-<pre><code># http/https 静态文件访问地址
-server {
- listen       80;
- listen       443 ssl;
- server_name  staticfile.erdongchen.top;
- charset utf-8;
-
- # ssl证书地址
- ssl_certificate     /usr/local/staticfile.pem;  # pem文件的路径
- ssl_certificate_key  /usr/local/staticfile.key; # key文件的路径
-
- # ssl验证相关配置
- #缓存有效期
- ssl_session_timeout  5m;
- #加密算法
- ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:ECDHE:ECDH:AES:HIGH:!NULL:!aNULL:!MD5:!ADH:!RC4;
- #安全链接可选的加密协议
- ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
- #使用服务器端的首选算法
- ssl_prefer_server_ciphers on;
-
- # 目录
- root /usr/local/staticFiles;
- #开启目录文件列表
- autoindex on;
- # 显示出文件的确切大小，单位是bytes
- autoindex_exact_size on;
- # 显示的文件时间为文件的服务器时间
- autoindex_localtime on;
-
- location /web/excelAddr/ {
-     # 这里是验证时的提示信息
-     auth_basic &quot;Please input password&quot;;
-     # 密码文件所在的位置
-     auth_basic_user_file /usr/local/mypassword;
- }
-
- location /files_bak/ {
-     deny all; # 不允许访问
- }
-
- error_page   500 502 503 504  /50x.html;
- location = /50x.html {
-     root   html;
- }
-}</code></pre></li>
-<li><p>访问https<br><a href="https://staticfile.erdongchen.top/" title="我的博客" target="_blank" rel="noopener"><strong><font color="purple">https://staticfile.erdongchen.top/</font></strong></a><br>此配置也可以使用http访问<br><a href="http://staticfile.erdongchen.top/" title="我的博客" target="_blank" rel="noopener"><strong><font color="purple">http://staticfile.erdongchen.top/</font></strong></a></p>
+<li><p>启动yarn：</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token comment" spellcheck="true">#随便那台机器上执行：</span>
+<span class="token variable">$HADOOP_HOME</span>/sbin/start-yarn.sh</code></pre>
 </li>
 </ol>
-<h3 id="九、新增stream模块以支持tcp代理-2019-12-03"><a href="#九、新增stream模块以支持tcp代理-2019-12-03" class="headerlink" title="九、新增stream模块以支持tcp代理(2019.12.03)"></a>九、新增stream模块以支持tcp代理(2019.12.03)</h3><p>由于个人项目上需要用到tcp代理的需求，这里记录一下通过配置nginx来实现tcp的代理转发：</p>
-<ol>
-<li><p>检查自己已经安装的nginx有没有支持stream模块：</p>
-<pre class=" language-bash"><code class="language-bash">nginx -V</code></pre>
-<p>如果在configure arguments 栏没有<code>--with-stream</code>模块，则表明nginx没有此模块；</p>
+<h3 id="六、yarn配置说明"><a href="#六、yarn配置说明" class="headerlink" title="六、yarn配置说明"></a>六、yarn配置说明</h3><ol>
+<li><p>关于Node Manager启动的数量是跟文件workers里面配置的信息相关；</p>
 </li>
-<li><p>上述命令执行的结果里面有configure arguments，把里面参数复制一份，停掉nginx，然后在nginx安装目录执行命令 </p>
-<pre class=" language-bash"><code class="language-bash"><span class="token comment" spellcheck="true"># 备注：--with-http_ssl_module是之前带的模块（有多少模块带多少），再在后面追加--with-stream</span>
-./configure --with-http_ssl_module --with-stream</code></pre>
+<li><p>Resource Manager节点则是在配置文件中yarn.resourcemanager.hostname配置项相关；</p>
 </li>
-<li><p>编译完成之后，在执行<code>make</code>命令；</p>
+<li><p>默认的为Node Manager分配的运行内存是8G，配置项是yarn.nodemanager.resource.memory-mb，这个参数要根据实际机器的性能进行变换；</p>
 </li>
-<li><p>如果没有报错，会在nginx安装目录下的objs目录生成nginx文件，把该文件覆盖到sbin目录</p>
+<li><p>默认的为Node Manager分配的逻辑cpu是8核，配置项是yarn.nodemanager.resource.cpu-vcores</p>
 </li>
-<li><p>配置stream模块，例如：<br>nginx.conf 主配置文件：</p>
-<img style="width:85%;height:85%" src="https://staticfile.erdongchen.top/blog/blogPicture/20190917/9.1.png" align="left/">
-
-<p>引入的外部文件配置：</p>
-<img style="width:85%;height:85%" src="https://staticfile.erdongchen.top/blog/blogPicture/20190917/9.2.png" align="left/">
+<li><p>默认的web访问端口是8088，比如我的yarn启动后，页面访问路径是：<code>http://192.168.6.100:8088</code>可通过如下配置进行修改：</p>
+<pre class=" language-xml"><code class="language-xml"> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>property</span><span class="token punctuation">></span></span>
+     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>name</span><span class="token punctuation">></span></span>yarn.resourcemanager.webapp.address<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>name</span><span class="token punctuation">></span></span>
+     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>value</span><span class="token punctuation">></span></span>${yarn.resourcemanager.hostname}:8089<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>value</span><span class="token punctuation">></span></span>
+ <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>property</span><span class="token punctuation">></span></span></code></pre>
 </li>
-<li><p>文件配置完毕之后，先检查配置是否正确：<code>nginx -t</code>,在启动nginx；这时便可以使用ngixn所在的服务器ip+端口（我这里配置的是80端口），nginx会自动将请求转发到192.168.1.184的2181端口上；步骤到这里就已经配置完毕了，实现了ip+端口的方式代理tcp请求，此配置也可以实现像mysql或者redis等等的tcp转发；</p>
+<li><p>yarn的配置项的详细说明在如下地方：</p>
+<img style="width:85%;height:85%" src="https://staticfile.erdongchen.top/blog/blogPicture/20200308/6.1.png" align="left/">
+<img style="width:85%;height:85%" src="https://staticfile.erdongchen.top/blog/blogPicture/20200308/6.2.png" align="left/">
+</li>
+<li><p>yarn的官方配置文档：hadoop官方网站：<a href="https://hadoop.apache.org/docs/stable/hadoop-yarn/hadoop-yarn-common/yarn-default.xml" title="yarn" target="_blank" rel="noopener"><strong>yarn官方配置文档</strong></a></p>
 </li>
 </ol>
 
@@ -895,16 +647,12 @@ server {
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/技术/">
-                                    <span class="chip bg-color">技术</span>
-                                </a>
-                            
-                                <a href="/tags/环境配置/">
-                                    <span class="chip bg-color">环境配置</span>
-                                </a>
-                            
                                 <a href="/tags/linux/">
                                     <span class="chip bg-color">linux</span>
+                                </a>
+                            
+                                <a href="/tags/yarn/">
+                                    <span class="chip bg-color">yarn</span>
                                 </a>
                             
                         </div>
@@ -950,7 +698,7 @@ server {
         repo: 'a878804506.github.io',
         owner: 'a878804506',
         admin: "a878804506",
-        id: '2019-09-17T18-25-40',
+        id: '2020-03-08T11-47-43',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -971,75 +719,63 @@ server {
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2019/09/20/nginx配置浅谈-configure的参数配置说明/">
+                <a href="/2020/03/08/大数据教程(五)-yarn的环境配置/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="nginx配置浅谈-configure的参数配置说明">
+                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="大数据教程(五)-yarn的环境配置">
                         
-                        <span class="card-title">nginx配置浅谈-configure的参数配置说明</span>
+                        <span class="card-title">大数据教程(五)-yarn的环境配置</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            参数说明
+                            一、本篇教程侧重点导读
+
+yarn的快速理解；
+yarn的安装位置解析；
+yarn配置文件与启动；
+yarn配置说明；
 
 
-序号
-参数格式
-参数含义
+二、本篇教程用的软件、技术和说明
 
-
-
-1
-–prefix=path
-定义安装目录
-
-
-2
-–sbin-path=path
-设置nginx可执行文件的路径
-
-
-3
-–modules-path=path
-定义将安装nginx动态模块的目
+yarn是在hadoop安装包里面启动，所以版本跟hadoop的版本一致；
+li
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2019-09-20
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-03-08
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/nginx/" class="post-category">
-                                    nginx
+                            <a href="/categories/大数据/" class="post-category">
+                                    大数据
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
-                    
-                    <a href="/tags/技术/">
-                        <span class="chip bg-color">技术</span>
-                    </a>
                     
                     <a href="/tags/linux/">
                         <span class="chip bg-color">linux</span>
                     </a>
                     
-                    <a href="/tags/说明书/">
-                        <span class="chip bg-color">说明书</span>
+                    <a href="/tags/yarn/">
+                        <span class="chip bg-color">yarn</span>
                     </a>
                     
                 </div>
@@ -1053,36 +789,42 @@ server {
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2019/09/06/国外VPS搭建SSR教程/">
+                <a href="/2020/03/05/大数据教程(四)-安装mysql/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="国外VPS搭建SSR教程">
+                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="大数据教程(四)-安装mysql">
                         
-                        <span class="card-title">国外VPS搭建SSR教程</span>
+                        <span class="card-title">大数据教程(四)-安装mysql</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            一、本篇教程用的软件、技术和环境
-一台国外的vps，系统：CentOS 7.4；
-ssh连接工具Xshell；
-Shadowsocks客户端； 
+                            一、本篇教程侧重点导读
 
-二、ssh连接到vps利用客户端软件（Xshell、Putty、SecureCRT等等）远程
+准备mysql安装包；
+创建mysql用户和组；
+解压安装包；
+配置my.cnf；
+修改当前目录拥有者为mysql用户；
+mysql初始化；
+复制启动脚本到资源目录；
+配置环境变量；
+启动mysql服务；
+登录my
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2019-09-06
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-03-05
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/其他教程/" class="post-category">
-                                    其他教程
+                            <a href="/categories/大数据/" class="post-category">
+                                    大数据
                                 </a>
                             
                             
@@ -1092,16 +834,12 @@ Shadowsocks客户端；
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/博客/">
-                        <span class="chip bg-color">博客</span>
-                    </a>
-                    
-                    <a href="/tags/技术/">
-                        <span class="chip bg-color">技术</span>
-                    </a>
-                    
                     <a href="/tags/linux/">
                         <span class="chip bg-color">linux</span>
+                    </a>
+                    
+                    <a href="/tags/mysql/">
+                        <span class="chip bg-color">mysql</span>
                     </a>
                     
                 </div>

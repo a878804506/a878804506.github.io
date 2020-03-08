@@ -509,14 +509,14 @@ mysql初始化；
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-03-05
+                    2020-03-08
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    961
+                    988
                 </div>
                 
 
@@ -559,6 +559,7 @@ mysql初始化；
 <ol>
 <li>mysql版本：mysql-5.6.39；</li>
 <li>linux系统：CentOS 7.2；</li>
+<li>mysql我是安装在slave2(192.168.6.102)上，mysql只是作为hive内部使用，装在哪里都可以；</li>
 </ol>
 </blockquote>
 <h3 id="三、准备mysql安装包"><a href="#三、准备mysql安装包" class="headerlink" title="三、准备mysql安装包"></a>三、准备mysql安装包</h3><p>&#160; &#160;<a href="https://pan.baidu.com/s/1TMCOOBR6shKot0sOHYa_hA" title="点击下载" target="_blank" rel="noopener"><strong><font color="purple">百度网盘下载mysql-5.6.39-linux-glibc2.12-x86_64</font></strong></a><br>&#160; &#160;提取码：4i3m</p>
@@ -718,18 +719,17 @@ mysql<span class="token operator">></span> grant all privileges on *.* to <span 
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2020/03/05/大数据教程(四)-安装mysql/">
+                <a href="/2020/03/08/大数据教程(五)-yarn的环境配置/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="大数据教程(四)-安装mysql">
+                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="大数据教程(五)-yarn的环境配置">
                         
-                        <span class="card-title">大数据教程(四)-安装mysql</span>
+                        <span class="card-title">大数据教程(五)-yarn的环境配置</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -737,22 +737,22 @@ mysql<span class="token operator">></span> grant all privileges on *.* to <span 
                         
                             一、本篇教程侧重点导读
 
-准备mysql安装包；
-创建mysql用户和组；
-解压安装包；
-配置my.cnf；
-修改当前目录拥有者为mysql用户；
-mysql初始化；
-复制启动脚本到资源目录；
-配置环境变量；
-启动mysql服务；
-登录my
+yarn的快速理解；
+yarn的安装位置解析；
+yarn配置文件与启动；
+yarn配置说明；
+
+
+二、本篇教程用的软件、技术和说明
+
+yarn是在hadoop安装包里面启动，所以版本跟hadoop的版本一致；
+li
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-03-05
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-03-08
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -765,7 +765,6 @@ mysql初始化；
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
@@ -773,8 +772,8 @@ mysql初始化；
                         <span class="chip bg-color">linux</span>
                     </a>
                     
-                    <a href="/tags/mysql/">
-                        <span class="chip bg-color">mysql</span>
+                    <a href="/tags/yarn/">
+                        <span class="chip bg-color">yarn</span>
                     </a>
                     
                 </div>
@@ -976,7 +975,7 @@ mysql初始化；
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">25k</span>&nbsp;字
+                class="white-color">25.8k</span>&nbsp;字
             
             
             
