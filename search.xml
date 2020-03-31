@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>大数据教程(六)-hive的安装和基本使用</title>
+      <link href="/2020/03/17/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%95%99%E7%A8%8B(%E5%85%AD)-hive%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/"/>
+      <url>/2020/03/17/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%95%99%E7%A8%8B(%E5%85%AD)-hive%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</url>
+      
+        <content type="html"><![CDATA[<h3 id="一、本篇教程侧重点导读"><a href="#一、本篇教程侧重点导读" class="headerlink" title="一、本篇教程侧重点导读"></a>一、本篇教程侧重点导读</h3><blockquote><ol><li>前置环境、hive版本与部署服务器选择；</li><li>下载解压、修改配置文件；</li><li>配置环境变量；</li><li>下载mysql驱动包</li><li>启动hive；</li><li>创建数据库表，并导入数据到hdfs；</li><li>导入数据，进行hive查询；</li><li>hive内部使用到的mysql部分表说明；</li><li>hive启动为服务；</li><li>脚本化运行方式；</li><li>hive建库建表与数据导入；</li><li>内部表与外部表；</li><li>分区表；</li><li>CTAS建表语法；</li><li>数据导入导出；</li></ol></blockquote><h3 id="二、本篇教程用的软件、技术和说明"><a href="#二、本篇教程用的软件、技术和说明" class="headerlink" title="二、本篇教程用的软件、技术和说明"></a>二、本篇教程用的软件、技术和说明</h3><blockquote><ol><li>hive的版本为3.1.2；</li><li>linux系统：CentOS 7.2；</li><li>需要mysql服务；</li><li>需要HDFS分布式文件系统；</li></ol></blockquote><h3 id="三、前置环境、hive版本与部署服务器选择"><a href="#三、前置环境、hive版本与部署服务器选择" class="headerlink" title="三、前置环境、hive版本与部署服务器选择"></a>三、前置环境、hive版本与部署服务器选择</h3><ol><li>hive的启动需要的环境：mysql、HDFS；</li><li>hive版本选择与下载：<a href="http://hive.apache.org/downloads.html" title="点击跳转" target="_blank" rel="noopener"><strong><font color="purple">点击跳转</font></strong></a>；</li><li>我的hive准备部署在master上（192.168.6.100）；</li></ol><h3 id="四、下载解压、修改配置文件"><a href="#四、下载解压、修改配置文件" class="headerlink" title="四、下载解压、修改配置文件"></a>四、下载解压、修改配置文件</h3><ol><li><p>解压 <code>tar -xzvf apache-hive-3.1.2-bin.tar.gz</code></p></li><li><p>在conf目录下新建配置文件hive-site.xml，配置如下内容：</p><pre class=" language-xml"><code class="language-xml"> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>configuration</span><span class="token punctuation">></span></span>     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>property</span><span class="token punctuation">></span></span>         <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>name</span><span class="token punctuation">></span></span>javax.jdo.option.ConnectionURL<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>name</span><span class="token punctuation">></span></span>         <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>value</span><span class="token punctuation">></span></span>jdbc:mysql://192.168.6.102:3306/hive?createDatabaseIfNotExist=true<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>value</span><span class="token punctuation">></span></span>         <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>description</span><span class="token punctuation">></span></span>JDBC connect string for a JDBC metastore<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>description</span><span class="token punctuation">></span></span>     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>property</span><span class="token punctuation">></span></span>     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>property</span><span class="token punctuation">></span></span>         <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>name</span><span class="token punctuation">></span></span>javax.jdo.option.ConnectionDriverName<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>name</span><span class="token punctuation">></span></span>         <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>value</span><span class="token punctuation">></span></span>com.mysql.jdbc.Driver<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>value</span><span class="token punctuation">></span></span>         <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>description</span><span class="token punctuation">></span></span>Driver class name for a JDBC metastore<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>description</span><span class="token punctuation">></span></span>     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>property</span><span class="token punctuation">></span></span>     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>property</span><span class="token punctuation">></span></span>         <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>name</span><span class="token punctuation">></span></span>javax.jdo.option.ConnectionUserName<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>name</span><span class="token punctuation">></span></span>         <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>value</span><span class="token punctuation">></span></span>root<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>value</span><span class="token punctuation">></span></span>         <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>description</span><span class="token punctuation">></span></span>username to use against metastore database<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>description</span><span class="token punctuation">></span></span>     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>property</span><span class="token punctuation">></span></span>     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>property</span><span class="token punctuation">></span></span>         <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>name</span><span class="token punctuation">></span></span>javax.jdo.option.ConnectionPassword<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>name</span><span class="token punctuation">></span></span>         <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>value</span><span class="token punctuation">></span></span>123456<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>value</span><span class="token punctuation">></span></span>         <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>description</span><span class="token punctuation">></span></span>password to use against metastore database<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>description</span><span class="token punctuation">></span></span>     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>property</span><span class="token punctuation">></span></span> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>configuration</span><span class="token punctuation">></span></span></code></pre></li></ol><h3 id="五、配置环境变量"><a href="#五、配置环境变量" class="headerlink" title="五、配置环境变量"></a>五、配置环境变量</h3><pre><code>HADOOP_HOME=/usr/local/hadoop-3.2.1HIVE_HOME=/usr/local/apache-hive-3.1.2-binPATH=$PATH:$JAVA_HOME/bin:$HADOOP_HOME/bin:$HADOOP_HOME/sbin:$HIVE_HOME/binexport PATH JAVA_HOME HADOOP_HOME HIVE_HOME CLASSPATH</code></pre><p>环境变量配置是否成功：<code>hive --version</code></p><h3 id="六、下载mysql驱动包"><a href="#六、下载mysql驱动包" class="headerlink" title="六、下载mysql驱动包"></a>六、下载mysql驱动包</h3><p>下载mysql驱动包并放到hive家目录的lib目录中，<a href="http://staticfile.erdongchen.top/download/mysql-connector-java-5.1.48.jar" title="点击下载" target="_blank" rel="noopener"><strong><font color="purple">下载mysql驱动包</font></strong></a></p><h3 id="七、启动hive"><a href="#七、启动hive" class="headerlink" title="七、启动hive"></a>七、启动hive</h3><p>配置完hive的环境变量后可以直接使用命令启动：<code>hive</code><br><strong><font color="red">防坑</font></strong>：启动报错：</p><pre><code>    java.lang.NoSuchMethodError: com.google.common.base.Preconditions.checkArgument(ZLjava/lang/String;Ljava/lang/Object;)V</code></pre><p><strong><font color="green">解决方案</font></strong>：<br> 在hadoop安装目录hadoop\share\hadoop\common\lib和hive\lib目录下分别找到guava.jar，将最新版本的jar包覆盖到另一个目录</p><h3 id="八、创建数据库表，并导入数据到hdfs"><a href="#八、创建数据库表，并导入数据到hdfs" class="headerlink" title="八、创建数据库表，并导入数据到hdfs"></a>八、创建数据库表，并导入数据到hdfs</h3><p>配置完hive的环境变量后可以直接使用命令启动：<code>hive</code><br><strong><font color="red">防坑</font></strong>：执行Hql语句<code>show databases;</code>报错：</p><pre><code>    FAILED: HiveException java.lang.RuntimeException: Unable to instantiate org.apache.hadoop.hive.ql.metadata.SessionHiveMetaStoreClient</code></pre><p><strong><font color="green">解决方案</font></strong>：<br> 在hive家目录执行初始化mysql的hive库的命令：<code>bin/schematool -dbType mysql -initSchema</code><br> 如图所示：<br> <img style="width:85%;height:85%" src="https://staticfile.erdongchen.top/blog/blogPicture/20200317/8.1.jpg" align="left/"></p><ol><li>创建数据库：<br><code>create database myHive;</code></li><li>创建一张数据表(后面会说明hive创建语法)：<br><code>create table students(id int,name string,age int,sex string)row format delimited fields terminated by &#39;,&#39;;</code><br>这样就会在hdfs上建立一个数据目录：<img style="width:85%;height:85%" src="https://staticfile.erdongchen.top/blog/blogPicture/20200317/8.2.jpg" align="left/"></li></ol><h3 id="九、导入数据，进行hive查询"><a href="#九、导入数据，进行hive查询" class="headerlink" title="九、导入数据，进行hive查询"></a>九、导入数据，进行hive查询</h3><ol><li>新建一个文件，名为stu，并填充如下内容<pre><code>1,张三,18,男2,李四,12,女3,王五,45,男4,赵六,33,男5,周七,48,男6,陈8,,27,女</code></pre></li><li>将文件put到HDFS上的hive仓库中：<pre><code>hadoop fs -put stu /user/hive/warehouse/students</code></pre></li><li>在hive的命令窗口执行命令：<code>select * from students;</code>，会得到如图所示的结果：<img style="width:85%;height:85%" src="https://staticfile.erdongchen.top/blog/blogPicture/20200317/9.1.jpg" align="left/"></li><li>小技巧<br>在当前登录用户的家目录下新建一个文件.hiverc。并键入如下配置<pre><code># 让提示符显示当前库set hive.cli.print.header=true;# 显示查询结果时显示字段名称set hive.cli.print.current.db=true;</code></pre>然后重启hive，当再次查询时：<img style="width:85%;height:85%" src="https://staticfile.erdongchen.top/blog/blogPicture/20200317/9.2.jpg" align="left/"></li><li>分组聚合查询：<code>select sex,count(1) as number from students group by sex;</code><img style="width:85%;height:85%" src="https://staticfile.erdongchen.top/blog/blogPicture/20200317/9.3.jpg" align="left/"></li></ol><h3 id="十、hive内部使用到的mysql部分表说明"><a href="#十、hive内部使用到的mysql部分表说明" class="headerlink" title="十、hive内部使用到的mysql部分表说明"></a>十、hive内部使用到的mysql部分表说明</h3><ol><li>这时我在新建一个表,便于观察：<pre><code>create table menu(id int,name string,parent_id int,url string)row format delimited fields terminated by &#39;,&#39;;</code></pre></li><li>部分表说明：<img style="width:85%;height:85%" src="https://staticfile.erdongchen.top/blog/blogPicture/20200317/10.1.jpg" align="left/"></li></ol><h3 id="十一、hive启动为服务"><a href="#十一、hive启动为服务" class="headerlink" title="十一、hive启动为服务"></a>十一、hive启动为服务</h3><ol><li>hive启动为服务(在master上执行)：<pre><code>nohup hiveserver2 1&gt;/dev/null 2&gt;&amp;1 &amp;</code></pre></li><li>启动成功后，可以在别的节点上用beeline去连接：<br><strong><font color="green">方式一</font></strong>： <code>bin/beeline</code>  回车，进入beeline的命令界面<br>输入命令连接hiveserver2:<br><code>beeline&gt; !connect jdbc:hive2://master:10000</code><br><strong><font color="green">方式二</font></strong>：直接连接：<code>bin/beeline -u jdbc:hive2://master:10000 -n root</code><br>效果如图所示：<img style="width:85%;height:85%" src="https://staticfile.erdongchen.top/blog/blogPicture/20200317/11.1.jpg" align="left/"></li></ol><p><strong><font color="red">防坑</font></strong>：beeline连接远程hive服务时报错：</p><pre><code>    Error: Could not open client transport with JDBC Uri: jdbc:hive2://master:10000: Failed to open new session: java.lang.RuntimeException: org.apache.hadoop.ipc.RemoteException(org.apache.hadoop.security.authorize.AuthorizationException): User: root is not allowed to impersonate root (state=08S01,code=0)</code></pre><p><strong><font color="green">解决方案</font></strong>：在hadoop的配置文件core-site.xml增加如下配置，重启hdfs</p><pre><code>    &lt;property&gt;        &lt;name&gt;hadoop.proxyuser.root.groups&lt;/name&gt;        &lt;value&gt;*&lt;/value&gt;    &lt;/property&gt;    &lt;property&gt;        &lt;name&gt;hadoop.proxyuser.root.hosts&lt;/name&gt;        &lt;value&gt;*&lt;/value&gt;    &lt;/property&gt;</code></pre><h3 id="十二、脚本化运行方式"><a href="#十二、脚本化运行方式" class="headerlink" title="十二、脚本化运行方式"></a>十二、脚本化运行方式</h3><ol><li>脚本命令的运行方式：<br><code>hive -e &quot;select * from students&quot;</code><img style="width:85%;height:85%" src="https://staticfile.erdongchen.top/blog/blogPicture/20200317/12.1.jpg" align="left/"></li><li>文件脚本的运行方式：<br><code>hive -f /usr/local/myHive.hql</code><img style="width:85%;height:85%" src="https://staticfile.erdongchen.top/blog/blogPicture/20200317/12.2.jpg" align="left/"></li></ol><h3 id="十三、hive建库建表与数据导入"><a href="#十三、hive建库建表与数据导入" class="headerlink" title="十三、hive建库建表与数据导入"></a>十三、hive建库建表与数据导入</h3><ol><li>建库语法：<br><code>create database myHive2;</code><br>数据库建好后，在hdfs中会生成一个目录：<img style="width:85%;height:85%" src="https://staticfile.erdongchen.top/blog/blogPicture/20200317/13.1.jpg" align="left/"></li><li>建表语法：<br><code>use myHive;</code><br><code>create table t_order(id string,create_time string,amount float,uid string);</code><br>表建好后，会在所属的库目录中生成一个表目录<br>/user/hive/warehouse/myHive.db/t_order<br>只是，这样建表的话，hive会认为表数据文件中的字段分隔符为 ^A<br>正确的建表语句为：<br><code>create table t_order(id string,create_time string,amount float,uid string) row format delimited fields terminated by &#39;,&#39;;</code><br>这样就指定了，我们的表数据文件中的字段分隔符为 “,”</li><li>删除表<br><code>drop table t_order cascade;</code><br>删除表的效果是：<br>hive会从元数据库中清除关于这个表的信息；<br>hive还会从hdfs中删除这个表的表目录；</li></ol><h3 id="十四、内部表与外部表"><a href="#十四、内部表与外部表" class="headerlink" title="十四、内部表与外部表"></a>十四、内部表与外部表</h3><ul><li>内部表(MANAGED_TABLE)：表目录按照hive的规范来部署，位于hive的仓库目录/user/hive/warehouse中</li><li>外部表(EXTERNAL_TABLE)：表目录由建表用户自己指定<ul><li><code>create external table t_access1(ip string,url string,access_time string) row format delimited fields terminated by &#39;,&#39; location &#39;/access/log&#39;;</code></li></ul></li><li>外部表和内部表的特性差别：<ul><li>1、内部表的目录在hive的仓库目录中 VS 外部表的目录由用户指定</li><li>2、drop一个内部表时：hive会清除相关元数据，并删除表数据目录</li><li>3、drop一个外部表时：hive只会清除相关元数据；</li></ul></li><li>一个hive的数据仓库，最底层的表，一定是来自于外部系统，为了不影响外部系统的工作逻辑，在hive中可建external表来映射这些外部系统产生的数据目录；</li><li>然后，后续的etl操作，产生的各种表建议用内部表(managed_table)</li></ul><h3 id="十五、分区表"><a href="#十五、分区表" class="headerlink" title="十五、分区表"></a>十五、分区表</h3><ul><li><p>分区表的实质是：在表目录中为数据文件创建分区子目录，以便于在查询时，MR程序可以针对分区子目录中的数据进行处理，缩减读取数据的范围。<br>  比如，网站每天产生的浏览记录，浏览记录应该建一个表来存放，但是，有时候，我们可能只需要对某一天的浏览记录进行分析<br>  这时，就可以将这个表建为分区表，每天的数据导入其中的一个分区；<br>  当然，每日的分区目录，应该有一个目录名（分区字段）</p></li><li><p>一个分区字段的实例<br>  0、测试数据下载<br>  <a href="http://staticfile.erdongchen.top/download/2019-09-15.log" title="点击下载" target="_blank" rel="noopener"><strong><font color="purple">2019-09-15.log</font></strong></a><br>  <a href="http://staticfile.erdongchen.top/download/2019-09-16.log" title="点击下载" target="_blank" rel="noopener"><strong><font color="purple">2019-09-16.log</font></strong></a><br>  <a href="http://staticfile.erdongchen.top/download/2019-09-17.log" title="点击下载" target="_blank" rel="noopener"><strong><font color="purple">2019-09-17.log</font></strong></a></p><p>  1、创建带分区的表</p><pre><code>  create table t_access(ip string,url string,access_time string) partitioned by(dt string) row format delimited fields terminated by &#39;,&#39;;  注意：分区字段不能是表定义中的已存在字段</code></pre><p>  2、向分区中导入数据</p><pre><code>  load data local inpath &#39;/usr/local/2019-09-15.log&#39; into table t_access partition(dt=&#39;20190915&#39;);  load data local inpath &#39;/usr/local/2019-09-16.log&#39; into table t_access partition(dt=&#39;20190916&#39;);  load data local inpath &#39;/usr/local/2019-09-17.log&#39; into table t_access partition(dt=&#39;20190917&#39;);</code></pre><p>  3、针对分区数据进行查询</p><pre><code>  a、统计15号的总PV：  select count(*) from t_access where dt=&#39;20190915&#39;;  实质：就是将分区字段当成表字段来用，就可以使用where子句指定分区了  b、统计表中所有数据总的PV：  select count(*) from t_access;  实质：不指定分区条件即可</code></pre></li><li><p>效果如下：</p><img style="width:85%;height:85%" src="https://staticfile.erdongchen.top/blog/blogPicture/20200317/15.1.png" align="left/"><img style="width:85%;height:85%" src="https://staticfile.erdongchen.top/blog/blogPicture/20200317/15.2.png" align="left/"></li><li><p>多个分区字段示例<br>  1、建表：</p><pre><code>  create table t_partition(id int,name string,age int)partitioned by(department string,sex string,howold int) row format delimited fields terminated by &#39;,&#39;;</code></pre><p>  2、导数据：</p><pre><code>  load data local inpath &#39;/root/p1.dat&#39; into table t_partition partition(department=&#39;xiangsheng&#39;,sex=&#39;male&#39;,howold=20);</code></pre></li></ul><h3 id="十六、CTAS建表语法"><a href="#十六、CTAS建表语法" class="headerlink" title="十六、CTAS建表语法"></a>十六、CTAS建表语法</h3><ul><li>可以通过已存在表来建表：<br>  1、新建的t_user_2表结构定义与源表t_user一致，但是没有数据<pre><code>  create table t_user_2 like t_user;</code></pre>  2、在建表的同时插入数据<pre><code>  create table t_access_user as select ip,url from t_access;  t_access_user会根据select查询的字段来建表，同时将查询的结果插入新表中</code></pre></li></ul><h3 id="十七、数据导入导出"><a href="#十七、数据导入导出" class="headerlink" title="十七、数据导入导出"></a>十七、数据导入导出</h3><ul><li>方式1：手动：<ul><li>手动用hdfs命令，将文件放入表目录；</li></ul></li><li>方式2：在hive的交互式shell中用hive命令来导入本地数据到表目录<ul><li>hive&gt;load data local inpath ‘/root/order.data.2’ into table t_order;</li></ul></li><li>方式3：用hive命令导入hdfs中的数据文件到表目录<ul><li>hive&gt;load data inpath ‘/access.log.2019-09-16.log’ into table t_access partition(dt=’20190916’);</li></ul></li></ul><p>注意：导本地文件和导HDFS文件的区别：<br> 本地文件导入表：复制<br> hdfs文件导入表：移动</p><ul><li><p>将hive表中的数据导出到指定路径的文件<br>  1、将hive表中的数据导入HDFS的文件</p><pre><code>  insert overwrite directory &#39;/root/access-data&#39; row format delimited fields terminated by &#39;,&#39; select * from t_access;</code></pre><p>  2、将hive表中的数据导入本地磁盘文件</p><pre><code>  insert overwrite local directory &#39;/root/access-data&#39; row format delimited fields terminated by &#39;,&#39; select * from t_access limit 100000;</code></pre></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 大数据 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> linux </tag>
+            
+            <tag> hive </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>大数据教程(五)-yarn的环境配置</title>
       <link href="/2020/03/08/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%95%99%E7%A8%8B(%E4%BA%94)-yarn%E7%9A%84%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"/>
       <url>/2020/03/08/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%95%99%E7%A8%8B(%E4%BA%94)-yarn%E7%9A%84%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</url>
@@ -184,9 +211,9 @@
       
         <tags>
             
-            <tag> 环境搭建 </tag>
-            
             <tag> 技术 </tag>
+            
+            <tag> 环境搭建 </tag>
             
             <tag> 日志分析平台 </tag>
             
@@ -240,9 +267,9 @@
       
         <tags>
             
-            <tag> 技术 </tag>
-            
             <tag> linux </tag>
+            
+            <tag> 技术 </tag>
             
             <tag> 说明书 </tag>
             
@@ -269,11 +296,11 @@
       
         <tags>
             
-            <tag> 技术 </tag>
-            
             <tag> 环境配置 </tag>
             
             <tag> linux </tag>
+            
+            <tag> 技术 </tag>
             
         </tags>
       
@@ -298,11 +325,11 @@
       
         <tags>
             
-            <tag> 博客 </tag>
+            <tag> linux </tag>
             
             <tag> 技术 </tag>
             
-            <tag> linux </tag>
+            <tag> 博客 </tag>
             
         </tags>
       
@@ -327,11 +354,11 @@
       
         <tags>
             
-            <tag> 技术 </tag>
-            
             <tag> 环境配置 </tag>
             
             <tag> linux </tag>
+            
+            <tag> 技术 </tag>
             
         </tags>
       
@@ -356,11 +383,11 @@
       
         <tags>
             
+            <tag> 技术 </tag>
+            
             <tag> 博客 </tag>
             
             <tag> 环境搭建 </tag>
-            
-            <tag> 技术 </tag>
             
         </tags>
       
