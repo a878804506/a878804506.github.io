@@ -1,0 +1,1318 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="Docker入门, 云辉相映">
+    <meta name="description" content="一、本篇侧重点
+
+Docker概念
+安装Docker
+Docker的常用命令
+联合文件系统
+
+
+二、Docker概念Docker作为容器化技术有头有脸的存在，至今还没有开始系统学习真的惭愧惭愧，这次我要把docker系统的撸一遍！
+话不多说">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Docker入门 | 云辉相映</title>
+    <link rel="icon" type="image/jpeg" href="/my.jpeg">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+    
+    <script src="/libs/jquery/jquery.min.js"></script>
+    
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper head-container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/myGirl.jpg" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">云辉相映</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/aboutshe" class="waves-effect waves-light">
+      
+      <i class="fas fa-image" style="zoom: 0.6;"></i>
+      
+      <span>关于她</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/myGirl.jpg" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">云辉相映</div>
+        <div class="logo-desc">
+            
+            写篇博客一时爽，一直写一直爽！
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/aboutshe" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-image"></i>
+			
+			关于她
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			Contact
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/a878804506" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/a878804506" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('请输入访问本文章的密码')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/11.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <div class="description center-align post-title">
+                        Docker入门
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/容器化/">
+                                <span class="chip bg-color">容器化</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/docker/" class="post-category">
+                                docker
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2021-04-29
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2021-04-29
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    2.7k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    11 分
+                </div>
+                
+				
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+            
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h3 id="一、本篇侧重点"><a href="#一、本篇侧重点" class="headerlink" title="一、本篇侧重点"></a>一、本篇侧重点</h3><blockquote>
+<ol>
+<li>Docker概念</li>
+<li>安装Docker</li>
+<li>Docker的常用命令</li>
+<li>联合文件系统</li>
+</ol>
+</blockquote>
+<h3 id="二、Docker概念"><a href="#二、Docker概念" class="headerlink" title="二、Docker概念"></a>二、Docker概念</h3><p>Docker作为容器化技术有头有脸的存在，至今还没有开始系统学习真的惭愧惭愧，这次我要把docker系统的撸一遍！</p>
+<p>话不多说先上一个官方图：</p>
+<img src="http://staticfile.erdongchen.top/blog/blogPicture/20210430/0.png" alt="0" style="width:85%;height:85%;">
+
+<p><strong>镜像（image)：</strong></p>
+<p>docker镜像就好比是一个目标，可以通过这个目标来创建容器服务，tomcat镜像==&gt;run==&gt;容器（提供服务器），通过这个镜像可以创建多个容器（最终服务运行或者项目运行就是在容器中的）。</p>
+<p><strong>容器(container)：</strong></p>
+<p>Docker利用容器技术，独立运行一个或者一组应用，通过镜像来创建的.<br>启动，停止，删除，基本命令<br>目前就可以把这个容器理解为就是一个简易的 Linux系统。</p>
+<p><strong>仓库(repository)：</strong></p>
+<p>仓库就是存放镜像的地方！<br>仓库分为公有仓库和私有仓库。(很类似git)<br>Docker Hub是国外的。<br>阿里云…都有容器服务器(配置镜像加速!)</p>
+<h3 id="三、安装Docker"><a href="#三、安装Docker" class="headerlink" title="三、安装Docker"></a>三、安装Docker</h3><blockquote>
+<p>环境准备</p>
+</blockquote>
+<p>我的机器是Centos 7.9，内核版本3.10</p>
+<pre class=" language-shell"><code class="language-shell">[root@i-nzuy9eqo etc]# uname -r
+3.10.0-957.27.2.el7.x86_64
+[root@i-nzuy9eqo etc]# cat /etc/redhat-release
+CentOS Linux release 7.9.2009 (Core)</code></pre>
+<pre class=" language-shell"><code class="language-shell"># 先设置一下国内的docker镜像仓库
+yum-config-manager  --add-repo  https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo</code></pre>
+<pre class=" language-shell"><code class="language-shell"># 再更新一下yum仓库
+yum update -y
+
+# 查看仓库里面的docker
+yum list docker-ce</code></pre>
+<img src="http://staticfile.erdongchen.top/blog/blogPicture/20210430/1.png" alt="1" style="width:85%;height:85%;">
+
+<pre class=" language-shell"><code class="language-shell"># 安装指定版本
+yum install docker-ce-20.10.6-3.el7 docker-ce-cli-20.10.6-3.el7 containerd.io
+
+# 启动docker
+systemctl start docker
+# 停止docker
+systemctl stop docker
+# 查看docker状态
+systemctl status docker
+
+# 使用docker version查看是否按照成功
+docker version
+
+# 测试
+docker run hello-world
+
+#查看docker镜像
+docker iamges</code></pre>
+<p>卸载docker</p>
+<pre class=" language-shell"><code class="language-shell">#1. 卸载依赖
+yum remove docker-ce docker-ce-cli containerd.io
+#2. 删除资源
+rm -rf /var/lib/docker
+# /var/lib/docker 是docker的默认工作路径！</code></pre>
+<p>使用命令 <code>docker run hello-world</code>启动容器的流程说明：</p>
+<img src="http://staticfile.erdongchen.top/blog/blogPicture/20210430/3.png" alt="3" style="width:85%;height:85%;">
+
+<p><strong>docker run 流程图</strong></p>
+<img src="http://staticfile.erdongchen.top/blog/blogPicture/20210430/2.png" alt="2" style="width:85%;height:85%;">
+
+<p>Docker是一个Client-Server结构的系统，Docker的守护进程运行在主机上。通过Socket从客户端访问！</p>
+<p>Docker-Server接收到Docker-Client的指令，就会执行这个命令！</p>
+<h3 id="四、Docker的常用命令"><a href="#四、Docker的常用命令" class="headerlink" title="四、Docker的常用命令"></a>四、Docker的常用命令</h3><ol>
+<li><p>帮助命令</p>
+<pre class=" language-shell"><code class="language-shell">docker version    # 显示docker的版本信息。
+docker info       # 显示docker的系统信息，包括镜像和容器的数量
+docker 命令 --help # 帮助命令  docker不知道的命令 就用这个查阅</code></pre>
+<p>官方文档地址：<a href="https://docs.docker.com/engine/reference/commandline/docker/" target="_blank" rel="noopener">https://docs.docker.com/engine/reference/commandline/docker/</a></p>
+</li>
+</ol>
+<ol start="2">
+<li><p>镜像命令</p>
+<pre class=" language-shell"><code class="language-shell">docker images # 查看所有本地主机上的镜像 可以使用docker image ls代替
+docker search # 搜索镜像
+docker pull # 下载镜像 docker image pull ，如果不写tag，默认就是latest
+docker rmi # 删除镜像 docker image rm</code></pre>
+<p>docker images查看所有本地的主机上的镜像</p>
+<pre class=" language-shell"><code class="language-shell"># 解释
+#REPOSITORY         # 镜像的仓库源
+#TAG                # 镜像的标签(版本)        ---lastest 表示最新版本
+#IMAGE ID           # 镜像的id
+#CREATED            # 镜像的创建时间
+#SIZE               # 镜像的大小
+# 可选项
+Options:
+  -a, --all         Show all images (default hides intermediate images) #列出所有镜像
+  -q, --quiet       Only show numeric IDs # 只显示镜像的id</code></pre>
+<p>这里可以使用一个骚操作：可以使用<code>docker rmi $(docker images -aq)</code></p>
+</li>
+</ol>
+<ol start="3">
+<li><p>容器命令</p>
+<p>根据官方导图，我们有了镜像才可以创建容器，我们来下载一个centos镜像</p>
+<pre class=" language-shell"><code class="language-shell"># docker中下载centos
+docker pull centos</code></pre>
+<pre class=" language-shell"><code class="language-shell">docker run 镜像id      # 新建容器并启动
+docker ps             #列出所有运行的容器  等同于 docker container list
+docker rm 容器id       # 删除指定容器
+docker start 容器id    # 启动容器
+docker restart 容器id  # 重启容器
+docker stop 容器id     # 停止当前正在运行的容器
+docker kill 容器id     # 强制停止当前容器
+exit                  # 容器直接退出
+ctrl +P +Q            # 容器不停止退出     ---注意：这个很有用的操作</code></pre>
+<p>新建容器并启动</p>
+<pre class=" language-shell"><code class="language-shell">docker run [可选参数] image  或者 docker container run [可选参数] image
+# 参数说明
+--name="Name"  # 容器名字 tomcat01 tomcat02 用来区分容器
+-d             # 后台方式运行
+-it            # 使用交互方式运行，进入容器查看内容
+-p             # 指定容器的端口 -p 8080(宿主机):8080(容器)
+     -p ip:主机端口:容器端口
+     -p 主机端口:容器端口(常用)
+     -p 容器端口
+-P(大写)        # 随机指定端口</code></pre>
+<img src="http://staticfile.erdongchen.top/blog/blogPicture/20210430/4.png" alt="4" style="width:85%;height:85%;">
+
+
+
+</li>
+</ol>
+<ol start="4">
+<li><p>其他常用命令</p>
+<ol>
+<li><p>后台启动命令：<code>docker run -d 镜像名</code></p>
+</li>
+<li><p>日志查看：</p>
+</li>
+</ol>
+<pre class=" language-shell"><code class="language-shell">docker logs --help
+Options:
+      --details        Show extra details provided to logs 
+*  -f, --follow         Follow log output
+      --since string   Show logs since timestamp (e.g. 2013-01-02T13:23:37) or relative (e.g. 42m for 42 minutes)
+*      --tail string    Number of lines to show from the end of the logs (default "all")
+*  -t, --timestamps     Show timestamps
+      --until string   Show logs before a timestamp (e.g. 2013-01-02T13:23:37) or relative (e.g. 42m for 42 minutes)
+
+# 显示日志
+-tf                           # 显示日志信息（一直更新）
+--tail number                 # 需要显示日志条数
+docker logs -t --tail n 容器id # 查看n行日志
+docker logs -ft 容器id         # 跟着日志</code></pre>
+<ol start="3">
+<li><p>查看容器容器中进程信息： <code>docker top 容器id</code></p>
+</li>
+<li><p>查看镜像元数据：<code>docker inspect 容器id</code>   很有用的</p>
+</li>
+<li><p>进入当前正在运行的容器：</p>
+</li>
+</ol>
+<pre class=" language-shell"><code class="language-shell">docker exec -it 容器id /bash/shell
+docker attach 容器id
+# 区别
+#docker exec   # 进入当前容器后开启一个新的终端，可以在里面操作
+#docker attach # 进入容器正在执行的终端</code></pre>
+<ol start="6">
+<li>从容器内复制文件到主机上</li>
+</ol>
+<pre class=" language-shell"><code class="language-shell">docker cp 容器id:容器内路径  主机目的路径
+# eg: 无论容器是否启动都可以复制！
+docker cp 3f76dd01d08b:/text.java /home</code></pre>
+<ol start="7">
+<li>commit镜像命令</li>
+</ol>
+<pre class=" language-shell"><code class="language-shell">docker commit # 提交容器成为一个新的副本
+# 命令和git原理类似
+docker commit -m="描述信息" -a="作者" 容器id 目标镜像名:[版本TAG]</code></pre>
+<ol start="8">
+<li>导入导出命令</li>
+</ol>
+<pre class=" language-shell"><code class="language-shell"># 将容器导出成tar文件 -o 指定目录 
+docker export -o /root/docker/nginx1.tar d75e9fe433c8
+# 将tar文件导入成镜像  testnginx是REPOSITORY，1.0是tag
+docker import -m '测试啊' nginx1.tar testnginx:1.0</code></pre>
+<img src="http://staticfile.erdongchen.top/blog/blogPicture/20210430/7.png" alt="7" style="width:85%;height:85%;">
+
+
+
+</li>
+</ol>
+<p>   小结：</p>
+   <img src="http://staticfile.erdongchen.top/blog/blogPicture/20210430/5.png" alt="5" style="width:85%;height:85%;">
+
+<p>   命令总结：</p>
+<pre class=" language-shell"><code class="language-shell">   attach      Attach local standard input, output, and error streams to a running container
+   #当前shell下 attach连接指定运行的镜像
+   build       Build an image from a Dockerfile # 通过Dockerfile定制镜像
+   commit      Create a new image from a container's changes #提交当前容器为新的镜像
+   cp          Copy files/folders between a container and the local filesystem #拷贝文件
+   create      Create a new container #创建一个新的容器
+   diff        Inspect changes to files or directories on a container's filesystem #查看docker容器的变化
+   events      Get real time events from the server # 从服务获取容器实时时间
+   exec        Run a command in a running container # 在运行中的容器上运行命令
+   export      Export a container's filesystem as a tar archive #导出容器文件系统作为一个tar归档文件[对应import]
+   history     Show the history of an image # 展示一个镜像形成历史
+   images      List images #列出系统当前的镜像
+   import      Import the contents from a tarball to create a filesystem image #从tar包中导入内容创建一个文件系统镜像
+   info        Display system-wide information # 显示全系统信息
+   inspect     Return low-level information on Docker objects #查看容器详细信息
+   kill        Kill one or more running containers # kill指定docker容器
+   load        Load an image from a tar archive or STDIN #从一个tar包或标准输入中加载一个镜像[对应save]
+   login       Log in to a Docker registry #
+   logout      Log out from a Docker registry
+   logs        Fetch the logs of a container
+   pause       Pause all processes within one or more containers
+   port        List port mappings or a specific mapping for the container
+   ps          List containers
+   pull        Pull an image or a repository from a registry
+   push        Push an image or a repository to a registry
+   rename      Rename a container
+   restart     Restart one or more containers
+   rm          Remove one or more containers
+   rmi         Remove one or more images
+   run         Run a command in a new container
+   save        Save one or more images to a tar archive (streamed to STDOUT by default)
+   search      Search the Docker Hub for images
+   start       Start one or more stopped containers
+   stats       Display a live stream of container(s) resource usage statistics
+   stop        Stop one or more running containers
+   tag         Create a tag TARGET_IMAGE that refers to SOURCE_IMAGE
+   top         Display the running processes of a container
+   unpause     Unpause all processes within one or more containers
+   update      Update configuration of one or more containers
+   version     Show the Docker version information
+   wait        Block until one or more containers stop, then print their exit codes</code></pre>
+<h3 id="五、联合文件系统"><a href="#五、联合文件系统" class="headerlink" title="五、联合文件系统"></a>五、联合文件系统</h3><blockquote>
+<p>UnionFs （联合文件系统）</p>
+</blockquote>
+<p>   UnionFs（联合文件系统）：Union文件系统（UnionFs）是一种分层、轻量级并且高性能的文件系统，他支持对文件系统的修改作为一次提交来一层层的叠加，同时可以将不同目录挂载到同一个虚拟文件系统下（ unite several directories into a single virtual filesystem)。Union文件系统是 Docker镜像的基础。镜像可以通过分层来进行继承，基于基础镜像（没有父镜像），可以制作各种具体的应用镜像<br>   特性：一次同时加载多个文件系统，但从外面看起来，只能看到一个文件系统，联合加载会把各层文件系统叠加起来，这样最终的文件系统会包含所有底层的文件和目录。</p>
+<blockquote>
+<p>Docker镜像加载原理</p>
+</blockquote>
+<p>   docker的镜像实际上由一层一层的文件系统组成，这种层级的文件系统UnionFS。<br>   boots(boot file system）主要包含 bootloader和 Kernel, bootloader主要是引导加 kernel, Linux刚启动时会加bootfs文件系统，在 Docker镜像的最底层是 boots。这一层与我们典型的Linux/Unix系统是一样的，包含boot加載器和内核。当boot加载完成之后整个内核就都在内存中了，此时内存的使用权已由 bootfs转交给内核，此时系统也会卸载bootfs。<br>   rootfs（root file system),在 bootfs之上。包含的就是典型 Linux系统中的/dev,/proc,/bin,/etc等标准目录和文件。 rootfs就是各种不同的操作系统发行版，比如 Ubuntu, Centos等等。</p>
+<blockquote>
+<p>分层的镜像</p>
+</blockquote>
+<p>   我们可以去下载一个镜像，注意观察下载的日志输出，可以看到是一层层的在下载 </p>
+   <img src="http://staticfile.erdongchen.top/blog/blogPicture/20210430/6.png" alt="6" style="width:85%;height:85%;">
+
+<p>   Docker镜像要采用这种分层的结构最大的好处，我觉得莫过于资源共享了！比如有多个镜像都从相同的Base镜像构建而来，那么宿主机只需在磁盘上保留一份base镜像，同时内存中也只需要加载一份base镜像，这样就可以为所有的容器服务了，而且镜像的每一层都可以被共享。</p>
+<p>   查看镜像分层的方式可以通过<code>docker image inspect</code>命令</p>
+<p>   所有的 Docker镜像都起始于一个基础镜像层，当进行修改或培加新的内容时，就会在当前镜像层之上，创建新的镜像层。</p>
+<p>   举一个简单的例子，假如基于 Ubuntu Linux16.04创建一个新的镜像，这就是新镜像的第一层；如果在该镜像中添加 Python包，<br>   就会在基础镜像层之上创建第二个镜像层；如果继续添加一个安全补丁，就会创健第三个镜像层该像当前已经包含3个镜像层，在添加额外的镜像层的同时，镜像始终保持是当前所有镜像的组合；</p>
+
+            </div>
+            <hr/>
+
+            
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/容器化/">
+                                    <span class="chip bg-color">容器化</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+        <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
+<link rel="stylesheet" href="/css/my-gitalk.css">
+
+<div class="card gitalk-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="gitalk-container" class="card-content"></div>
+</div>
+
+<script src="/libs/gitalk/gitalk.min.js"></script>
+<script>
+    let gitalk = new Gitalk({
+        clientID: 'b5ee4ffd61ba1cc8fcc6',
+        clientSecret: '4441f35b9478892ef48706461e741e1f94aec913',
+        repo: 'a878804506.github.io',
+        owner: 'a878804506',
+        admin: "a878804506",
+        id: '2021-04-29T20-54-52',
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    });
+
+    gitalk.render('gitalk-container');
+</script>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/2021/04/29/Docker入门/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="Docker入门">
+                        
+                        <span class="card-title">Docker入门</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            一、本篇侧重点
+
+Docker概念
+安装Docker
+Docker的常用命令
+联合文件系统
+
+
+二、Docker概念Docker作为容器化技术有头有脸的存在，至今还没有开始系统学习真的惭愧惭愧，这次我要把docker系统的撸一遍！
+话不多说
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-04-29
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/docker/" class="post-category">
+                                    docker
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/容器化/">
+                        <span class="chip bg-color">容器化</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2020/12/25/基于hexo从拉取博客源码到发布一篇博文总结/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="基于hexo从拉取博客源码到发布一篇博文总结">
+                        
+                        <span class="card-title">基于hexo从拉取博客源码到发布一篇博文总结</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            写在前面
+2020年快要结束，看看最后一篇博文，才发现已经有好几个月没有写写学习总结了，入职以来从没出差的我因为项目原因频繁出差，也是这个北京水文地质项目让我学到了很多，项目的开发周期缩短，也是得益于公司买了一套很实用的前后端开发框架(bl
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-12-25
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/hexo/" class="post-category">
+                                    hexo
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/hexo/">
+                        <span class="chip bg-color">hexo</span>
+                    </a>
+                    
+                    <a href="/tags/笔记/">
+                        <span class="chip bg-color">笔记</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+    
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+    <footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">年份</span>
+            <a href="http://myblog.erdongchen.top" target="_blank">陈韵辉</a>
+            <br>
+            
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                class="white-color">39.2k</span>&nbsp;字
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <span id="sitetime">载入运行时间...</span>
+            <script>
+                function siteTime() {
+                    window.setTimeout("siteTime()", 1000);
+                    var seconds = 1000;
+                    var minutes = seconds * 60;
+                    var hours = minutes * 60;
+                    var days = hours * 24;
+                    var years = days * 365;
+                    var today = new Date();
+                    var startYear = "2019";
+                    var startMonth = "8";
+                    var startDate = "15";
+                    var startHour = "0";
+                    var startMinute = "0";
+                    var startSecond = "0";
+                    var todayYear = today.getFullYear();
+                    var todayMonth = today.getMonth() + 1;
+                    var todayDate = today.getDate();
+                    var todayHour = today.getHours();
+                    var todayMinute = today.getMinutes();
+                    var todaySecond = today.getSeconds();
+                    var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                    var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                    var diff = t2 - t1;
+                    var diffYears = Math.floor(diff / years);
+                    var diffDays = Math.floor((diff / days) - diffYears * 365);
+                    var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                    var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                        minutes);
+                    var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                        diffMinutes * minutes) / seconds);
+                    if (startYear == todayYear) {
+                        document.getElementById("year").innerHTML = todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffDays + " 天 " + diffHours +
+                            " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    } else {
+                        document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffYears + " 年 " + diffDays +
+                            " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    }
+                }
+                setInterval(siteTime, 1000);
+            </script>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/a878804506" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:878804506@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=878804506" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 878804506" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+});
+</script>
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i["DaoVoiceObject"] = r;
+            i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o), m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            a.charset = "utf-8";
+            m.parentNode.insertBefore(a, m)
+        })(window, document, "script", ('https:' == document.location.protocol ? 'https:' : 'http:') +
+            "//widget.daovoice.io/widget/6984b559.js", "daovoice")
+        daovoice('init', {
+            app_id: "75a4e970"
+        });
+        daovoice('update');
+    </script>
+    
+
+    
+
+    
+
+    
+    <script type="text/javascript" src="/libs/background/ribbon-dynamic.js" async="async"></script>
+    
+    
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

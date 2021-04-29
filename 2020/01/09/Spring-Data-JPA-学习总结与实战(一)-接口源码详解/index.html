@@ -503,7 +503,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-03-05
+                    2020-12-29
                 </div>
                 
 
@@ -550,6 +550,7 @@
 <h3 id="二、本篇教程用的软件、技术和说明"><a href="#二、本篇教程用的软件、技术和说明" class="headerlink" title="二、本篇教程用的软件、技术和说明"></a>二、本篇教程用的软件、技术和说明</h3><ol>
 <li>spring boot 版本：2.1.1.RELEASE；</li>
 <li>Spring Data JPA 版本：2.1.3.RELEASE；</li>
+<li>IntelliJ IDEA 2019.1.1</li>
 </ol>
 <h3 id="三、顶级接口Repostitory介绍及层级关系"><a href="#三、顶级接口Repostitory介绍及层级关系" class="headerlink" title="三、顶级接口Repostitory介绍及层级关系"></a>三、顶级接口Repostitory介绍及层级关系</h3><ol>
 <li><p>首先要知道jpa是一种规范，hebernate是jpa的一种实现，Spring Data JPA底层用的还是hebernate，Spring Data JPA 是Spring Data的一个子项目。它依赖了Spring Data Common包,而接口Repostitory也是位于Spring Data Common的lib里面的，是Spring Data里面做数据库操作的最底层的抽象接口、 最顶级的父类， 源码里面其实什么方法都没有， 仅仅起到一个标识作用。<br>Repostitory的源码如下：</p>
@@ -939,42 +940,40 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2020/03/05/大数据教程(四)-安装mysql/">
+                <a href="/2020/01/10/Spring-Data-JPA-学习总结与实战(二)-常用注解详解/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="大数据教程(四)-安装mysql">
+                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="Spring Data JPA 学习总结与实战(二)-常用注解详解">
                         
-                        <span class="card-title">大数据教程(四)-安装mysql</span>
+                        <span class="card-title">Spring Data JPA 学习总结与实战(二)-常用注解详解</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
                             一、本篇教程侧重点导读
+注解式查询；
+@Entity实例里面基础注解；
+关联关系注解；
 
-准备mysql安装包；
-创建mysql用户和组；
-解压安装包；
-配置my.cnf；
-修改当前目录拥有者为mysql用户；
-mysql初始化；
-复制启动脚本到资源目录；
-配置环境变量；
-启动mysql服务；
-登录my
+二、本篇教程用的软件、技术和说明
+所用技术及软件同上篇；
+本篇主要围绕Spring Data JPA里面常用注解进行三方面的总结；
+
+三、注解式查询；
                         
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-03-05
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-01-10
                         </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/大数据/" class="post-category">
-                                    大数据
+                            <a href="/categories/Spring-Data-JPA/" class="post-category">
+                                    Spring Data JPA
                                 </a>
                             
                             
@@ -984,12 +983,16 @@ mysql初始化；
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/linux/">
-                        <span class="chip bg-color">linux</span>
+                    <a href="/tags/spring全家桶/">
+                        <span class="chip bg-color">spring全家桶</span>
                     </a>
                     
-                    <a href="/tags/mysql/">
-                        <span class="chip bg-color">mysql</span>
+                    <a href="/tags/框架/">
+                        <span class="chip bg-color">框架</span>
+                    </a>
+                    
+                    <a href="/tags/总结/">
+                        <span class="chip bg-color">总结</span>
                     </a>
                     
                 </div>
@@ -1197,7 +1200,7 @@ ZooKeeper安装包版本为：3.5.6
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">28.2k</span>&nbsp;字
+                class="white-color">39.2k</span>&nbsp;字
             
             
             
