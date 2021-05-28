@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://myblog.erdongchen.top/"/>
-  <updated>2021-04-29T13:27:35.775Z</updated>
+  <updated>2021-05-28T13:59:26.450Z</updated>
   <id>http://myblog.erdongchen.top/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Docker数据卷技术</title>
+    <link href="http://myblog.erdongchen.top/2021/05/25/Docker%E6%95%B0%E6%8D%AE%E5%8D%B7%E6%8A%80%E6%9C%AF/"/>
+    <id>http://myblog.erdongchen.top/2021/05/25/Docker数据卷技术/</id>
+    <published>2021-05-25T12:54:52.000Z</published>
+    <updated>2021-05-28T13:59:26.450Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;一、本篇侧重点&quot;&gt;&lt;a href=&quot;#一、本篇侧重点&quot; class=&quot;headerlink&quot; title=&quot;一、本篇侧重点&quot;&gt;&lt;/a&gt;一、本篇侧重点&lt;/h3&gt;&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;数据卷容器&lt;/li&gt;
+&lt;li&gt;Docker的具名挂载、匿名挂载
+      
+    
+    </summary>
+    
+      <category term="docker" scheme="http://myblog.erdongchen.top/categories/docker/"/>
+    
+    
+      <category term="容器化" scheme="http://myblog.erdongchen.top/tags/%E5%AE%B9%E5%99%A8%E5%8C%96/"/>
+    
+      <category term="docker" scheme="http://myblog.erdongchen.top/tags/docker/"/>
+    
+  </entry>
   
   <entry>
     <title>Docker入门</title>
@@ -527,35 +555,6 @@
       <category term="linux" scheme="http://myblog.erdongchen.top/tags/linux/"/>
     
       <category term="说明书" scheme="http://myblog.erdongchen.top/tags/%E8%AF%B4%E6%98%8E%E4%B9%A6/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>nginx配置浅谈-nginx.conf</title>
-    <link href="http://myblog.erdongchen.top/2019/09/17/nginx%E9%85%8D%E7%BD%AE%E6%B5%85%E8%B0%88-nginx-conf/"/>
-    <id>http://myblog.erdongchen.top/2019/09/17/nginx配置浅谈-nginx-conf/</id>
-    <published>2019-09-17T10:25:40.000Z</published>
-    <updated>2020-12-29T12:20:16.360Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;一、本篇教程侧重点导读&quot;&gt;&lt;a href=&quot;#一、本篇教程侧重点导读&quot; class=&quot;headerlink&quot; title=&quot;一、本篇教程侧重点导读&quot;&gt;&lt;/a&gt;一、本篇教程侧重点导读&lt;/h3&gt;&lt;ol&gt;
-&lt;li&gt;nginx.conf配置总体说明以及示例；&lt;/li&gt;
-&lt;
-      
-    
-    </summary>
-    
-      <category term="nginx" scheme="http://myblog.erdongchen.top/categories/nginx/"/>
-    
-    
-      <category term="技术" scheme="http://myblog.erdongchen.top/tags/%E6%8A%80%E6%9C%AF/"/>
-    
-      <category term="环境配置" scheme="http://myblog.erdongchen.top/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"/>
-    
-      <category term="linux" scheme="http://myblog.erdongchen.top/tags/linux/"/>
     
   </entry>
   
