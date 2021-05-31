@@ -537,9 +537,9 @@
       
         <tags>
             
-            <tag> 技术 </tag>
-            
             <tag> linux </tag>
+            
+            <tag> 技术 </tag>
             
             <tag> 说明书 </tag>
             
@@ -566,11 +566,11 @@
       
         <tags>
             
-            <tag> 技术 </tag>
+            <tag> 环境配置 </tag>
             
             <tag> linux </tag>
             
-            <tag> 环境配置 </tag>
+            <tag> 技术 </tag>
             
         </tags>
       
@@ -595,11 +595,11 @@
       
         <tags>
             
-            <tag> 博客 </tag>
+            <tag> linux </tag>
             
             <tag> 技术 </tag>
             
-            <tag> linux </tag>
+            <tag> 博客 </tag>
             
         </tags>
       
@@ -624,11 +624,11 @@
       
         <tags>
             
-            <tag> 技术 </tag>
+            <tag> 环境配置 </tag>
             
             <tag> linux </tag>
             
-            <tag> 环境配置 </tag>
+            <tag> 技术 </tag>
             
         </tags>
       
@@ -653,9 +653,9 @@
       
         <tags>
             
-            <tag> 博客 </tag>
-            
             <tag> 技术 </tag>
+            
+            <tag> 博客 </tag>
             
             <tag> 环境搭建 </tag>
             
