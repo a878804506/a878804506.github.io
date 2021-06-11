@@ -510,7 +510,7 @@ Dockerfile指令说明
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-05-31
+                    2021-06-03
                 </div>
                 
 
@@ -738,7 +738,7 @@ CMD ["/usr/local/nginx/sbin/nginx","-g","daemon off;"]</code></pre>
 <pre class=" language-shell"><code class="language-shell"># 使用命令创建镜像  不要忘记后面的点！！！
 # -f 可指定dockerfile文件
 # -t 镜像名
-docker build -t nginx_stream .</code></pre>
+docker build -t nginx_stream:1.0 .</code></pre>
 <img style="width:40%;height:40%" src="http://staticfile.erdongchen.top/blog/blogPicture/20210524/6.2.png" align="left/">
 
 <pre class=" language-shell"><code class="language-shell"># 导出镜像成一个tar文件
@@ -907,18 +907,17 @@ http {
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2021/05/25/Docker数据卷技术/">
+                <a href="/2021/06/01/Docker网络原理/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="Docker数据卷技术">
+                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="Docker网络原理">
                         
-                        <span class="card-title">Docker数据卷技术</span>
+                        <span class="card-title">Docker网络原理</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -926,23 +925,22 @@ http {
                         
                             一、本篇侧重点
 
-数据卷容器
-Docker的具名挂载、匿名挂载、指定路径挂载
-Dockerfile
-Dockerfile指令说明
-实战：Dockerfile构建带http-flv模块的nginx镜像
+docker0网络
+自定义网络
+网络连通
+实战：搭建redis集群环境
 
 
-二、数据卷容器
-话不多说先上图！
+二、docker0网络首选看一下宿主机的网络情况
 
 
+docker0属于是桥接网卡，在安装docker的时候自动会有docker0，所有镜像运行后
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-05-25
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-06-01
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -955,7 +953,6 @@ Dockerfile指令说明
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
@@ -1166,7 +1163,7 @@ Docker的常用命令
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">41.2k</span>&nbsp;字
+                class="white-color">42.3k</span>&nbsp;字
             
             
             
